@@ -19,7 +19,8 @@ export default function SoftGate({ children }: { children: ReactNode }) {
 
   const submit = (e: FormEvent) => {
     e.preventDefault()
-    if (normalize(value).includes('mameli')) {
+    // password provvisoria finché il sito non è completo (poi tornerà 'mameli')
+    if (normalize(value).includes('fake')) {
       localStorage.setItem(KEY, 'ok')
       setOpen(true)
     } else {

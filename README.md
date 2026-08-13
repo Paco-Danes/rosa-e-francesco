@@ -7,7 +7,7 @@ Un regalo in due atti, online su **https://paco-danes.github.io/rosa-e-francesco
 
 Più le sezioni: **pensieri dolci** (lettere), **ricordi** (polaroid), **noi** (contatori dall'8 agosto 2025).
 
-L'ingresso è protetto da una domanda dolce (risposta: *mameli*, maiuscole/minuscole indifferenti — è solo un cancelletto gentile, non vera sicurezza: il sito e le foto restano pubblici per chi ha il link).
+L'ingresso è protetto da una domanda dolce. **Password provvisoria durante i lavori: *fake*** (quando il sito sarà pronto, riportarla a *mameli* in `src/gate/SoftGate.tsx`). Maiuscole/minuscole indifferenti — è solo un cancelletto gentile, non vera sicurezza: il sito e le foto restano pubblici per chi ha il link.
 
 ## ✏️ Come personalizzare (le uniche cose da toccare)
 
