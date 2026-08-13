@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4d2a12"/>
+      <stop offset="1" stop-color="#f2b13c"/>
+    </linearGradient>
+    <radialGradient id="v" cx="0.5" cy="0.45" r="0.75">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.35"/>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#g)"/>
+  <g opacity="0.5" fill="#ffffff">
+    <circle cx="80" cy="70" r="2"/><circle cx="180" cy="40" r="1.5"/><circle cx="300" cy="90" r="2"/>
+    <circle cx="430" cy="50" r="1.5"/><circle cx="540" cy="100" r="2"/><circle cx="600" cy="40" r="1.5"/>
+    <circle cx="120" cy="140" r="1.5"/><circle cx="500" cy="160" r="1.5"/>
+  </g>
+  <path d="M320 330 C240 268 196 224 196 176 C196 140 224 116 254 116 C280 116 304 132 320 156 C336 132 360 116 386 116 C416 116 444 140 444 176 C444 224 400 268 320 330 Z"
+        fill="none" stroke="#ffffff" stroke-opacity="0.75" stroke-width="6" stroke-linejoin="round"/>
+  <rect width="640" height="480" fill="url(#v)"/>
+  <text x="320" y="392" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-style="italic" fill="#ffffff" fill-opacity="0.95">Il nostro mare</text>
+  <text x="320" y="430" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#ffffff" fill-opacity="0.65">Rosa &#9829; Francesco &#8212; (la vostra foto qui)</text>
+</svg>
