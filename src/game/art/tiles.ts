@@ -1,30 +1,460 @@
-// STUB — sostituito dal tileset completo (vedi catalog.ts per il contratto).
+/**
+ * TILESET 16×16 — stile Pokémon HGSS/BW: texture morbide, 3 toni per
+ * materiale, nessuna griglia visibile sui terreni naturali.
+ * Ogni tile affianca se stesso senza pattern evidente (bordi "quieti").
+ */
 import { sprite } from './format'
 import type { TileKey, TileSpec } from './catalog'
 
+// ---------------------------------------------------------------- erba
+
 const grass = sprite([
   'gggggggggggggggg',
-  'ggggggvggggggggg',
+  'gggggggggggGgggg',
+  'ggvggggggggggggg',
   'gggggggggggggggg',
-  'gggGgggggggggggg',
-  'gggggggggggvgggg',
+  'gggggGgggggggvgg',
   'gggggggggggggggg',
-  'gggggggGgggggggg',
-  'gggggggggggggggg',
-  'gvgggggggggggggg',
-  'gggggggggggggggg',
+  'gGgggggggggggggg',
   'ggggggggggGggggg',
+  'ggggvggggggggggg',
+  'gggggggggggggggg',
+  'gggggggggggggGgg',
+  'ggGggggvgggggggg',
   'gggggggggggggggg',
   'gggggggggggggggg',
-  'ggGggggggvgggggg',
-  'gggggggggggggggg',
+  'ggggGggggggvgggg',
   'gggggggggggggggg',
 ])
 
-const stub: Partial<Record<TileKey, TileSpec>> = {
-  grass: { frames: [grass] },
-}
+const grass2 = sprite([
+  'gggggggggggggggg',
+  'gggggggggggggggg',
+  'ggvgvggggggggggg',
+  'ggGvGggggggggggg',
+  'gggGgggggggggggg',
+  'ggggggggggvgvggg',
+  'ggggggggggGvGggg',
+  'gGgggggggggGgggg',
+  'gggggggggggggggg',
+  'gggggggggggggggg',
+  'gggggvgvgggggggg',
+  'gggggGvGgggggggg',
+  'ggggggGggggggvgg',
+  'gggggggggggggggg',
+  'gggggggggggvgvgg',
+  'ggGggggggggGvGgg',
+])
 
-export const TILES = new Proxy(stub, {
-  get: (t, k: string) => (t as Record<string, TileSpec>)[k] ?? { frames: [grass] },
-}) as Record<TileKey, TileSpec>
+const tallGrass = sprite([
+  'ggvgggvggggvggvg',
+  'gvVgvgVvggvVgvVg',
+  'gVVvVgVVvgVVvVVg',
+  'gGVVVvGVVvGVVVGg',
+  'gVGVVVVGVVVGVVVg',
+  'gGVGVVGVGVVGVGVg',
+  'gGGTGVGGTGVGGTGg',
+  'gGgGGgGGgGGgGgGg',
+  'ggvgvggvgggvgvgg',
+  'gvVgVvgVvgvVgVvg',
+  'gVVvVVvVVvgVVvVg',
+  'gGVVVGVVVvGVVVGg',
+  'gVGVVVVGVVVGVVVg',
+  'gGVGVVGVGVVGVGVg',
+  'gGGTGVGGTGVGGTGg',
+  'gGgGGgGGgGGgGgGg',
+])
+
+const flowers = sprite([
+  'gggggggggggggggg',
+  'gggpgggggggggggg',
+  'ggpYpggggggggggg',
+  'gggpgggggggggggg',
+  'ggggggggggggwggg',
+  'gggggggggggwYwgg',
+  'ggggggggggggwggg',
+  'gGgggggggggggggg',
+  'ggggggggqggggggg',
+  'gggggggggggggggg',
+  'gggggpgggggggggg',
+  'ggggpYpggggggggg',
+  'gggggpgggggggggg',
+  'ggggggggggggGggg',
+  'ggggggggggqggggg',
+  'gggggggggggggggg',
+])
+
+// ------------------------------------------------------- sentieri / pietra
+
+const path = sprite([
+  'SSSSSSSSSSSSSSSS',
+  'SSStSSSSSSSSsSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SsSSSSSStSSSSSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSSStSSSSSSSSsS',
+  'SSSSSSSSSSSSSSSS',
+  'StSSSSSSSSSsSSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSSSSStSSSSSSSS',
+  'SSsSSSSSSSSSSStS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSSSsSSSStSSSSS',
+  'SSSSSSSSSSSSSSSS',
+  'StSSSSSSSSSSsSSS',
+  'SSSSSSSSSSSSSSSS',
+])
+
+const pathStones = sprite([
+  'SSSSSSSSSSSSSSSS',
+  'SSScCSSSSSSSSSSS',
+  'SSSCnSSSSSSStSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSSSSSSSScCSSSS',
+  'SsSSSSSSSSCnSSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSSSStSSSSSSSSS',
+  'SScCSSSSSSSSSSsS',
+  'SSCnSSSSSSSSSSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSSSSSSSScCSSSS',
+  'SSSSsSSSSSCnSSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSSSSStSSSSSSSS',
+  'SSSSSSSSSSSSSSSS',
+])
+
+const cobble = sprite([
+  'ccCCCCnNccCCCCnN',
+  'cCCCCCnNcCCCCCnN',
+  'nCCCCnnNnCCCCnnN',
+  'nnnnnnnnnnnnnnnn',
+  'CCnNccCCCCnNccCC',
+  'CCnNcCCCCCnNcCCC',
+  'CnnNnCCCCnnNnCCC',
+  'nnnnnnnnnnnnnnnn',
+  'ccCCCCnNcCCCCCnN',
+  'cCCCCCnNcCCCCCnN',
+  'nCCCCnnNnCCCCnnN',
+  'nnnnnnnnnnnnnnnn',
+  'CCnNcCCCCCnNccCC',
+  'CCnNcCCCCCnNcCCC',
+  'CnnNnCCCCnnNnCCC',
+  'nnnnnnnnnnnnnnnn',
+])
+
+const plaza = sprite([
+  'cccccccCcccccccC',
+  'cWcccccCcccccccC',
+  'cccccccCccccWccC',
+  'cccccccCcccccccC',
+  'ccccCccCcccccccC',
+  'cccccccCcccccccC',
+  'cccccccCcCcccccC',
+  'CCCCCCCnCCCCCCCn',
+  'cccCcccccccCcccc',
+  'cccCccWccccCcccc',
+  'cccCcccccccCcccc',
+  'cccCcccccccCccCc',
+  'cWcCcccccccCcccc',
+  'cccCcccccccCcccc',
+  'cccCcccccccCcccc',
+  'CCCnCCCCCCCnCCCC',
+])
+
+// ------------------------------------------------------------- spiaggia
+
+const sand = sprite([
+  'ssssssssssssssss',
+  'ssssSsssssssssss',
+  'ssssssssssSsssss',
+  'sSssssssssssssss',
+  'ssssssssssssssSs',
+  'ssssssSsssssssss',
+  'ssssssssssssssss',
+  'ssSsssssssssSsss',
+  'ssssssssssssssss',
+  'sssssssSssssssss',
+  'sSssssssssssssss',
+  'ssssssssssssSsss',
+  'ssssSsssssssssss',
+  'ssssssssssssssss',
+  'sssssssssSssssss',
+  'sSssssssssssssss',
+])
+
+const sandWet = sprite([
+  'SSSSSSSSSSSSSSSS',
+  'SSiiSSSSSSSSSSSS',
+  'SSSSSSSSSSiiSSSS',
+  'StSSSSSSSSSSSSSS',
+  'SSSSSSSSSSSSSStS',
+  'SSSSSiiSSSSSSSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSStSSSSSSiiSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SiiSSSSStSSSSSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSSSSSSSSSSiiSS',
+  'SSStSSSiiSSSSSSS',
+  'SSSSSSSSSSSSSSSS',
+  'SSSSSSSSSSStSSSS',
+  'SSSSSiiSSSSSSSSS',
+])
+
+// --------------------------------------------------------------- acqua
+
+const water0 = sprite([
+  'bbbbbbbbbbbbbbbb',
+  'bbbbiibbbbbbbbbb',
+  'bbbbbBBbbbbbbbbb',
+  'bbbbbbbbbbbiibbb',
+  'bbbbbbbbbbbbBBbb',
+  'biibbbbbbbbbbbbb',
+  'bbBBbbbbiibbbbbb',
+  'bbbbbbbbbBBbbbbb',
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbbbbbbbbbiib',
+  'bbbbbbbbbbbbbbBB',
+  'bbbiibbbbbbbbbbb',
+  'bbbbBBbbbbbbbbbb',
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbbbbiibbbbbb',
+  'bbbbbbbbbBBbbbbb',
+])
+
+const water1 = sprite([
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbiibbbbbbbbb',
+  'bbbbbbBBbbbbbbbb',
+  'bbbbbbbbbbbbiibb',
+  'bbbbbbbbbbbbbBBb',
+  'bbiibbbbbbbbbbbb',
+  'bbbBBbbbbiibbbbb',
+  'bbbbbbbbbbBBbbbb',
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbbbbbbbbbbii',
+  'bbbbbbbbbbbbbbbB',
+  'bbbbiibbbbbbbbbb',
+  'bbbbbBBbbbbbbbbb',
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbbbbbiibbbbb',
+  'bbbbbbbbbbBBbbbb',
+])
+
+const water2 = sprite([
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbibbbbbbbbbb',
+  'bbbbbbBbbbbbbbbb',
+  'bbbbbbbbbbbbibbb',
+  'bbbbbbbbbbbbbBbb',
+  'bbibbbbbbbbbbbbb',
+  'bbbBbbbbbibbbbbb',
+  'bbbbbbbbbbBbbbbb',
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbbbbbbbbbbib',
+  'bbbbbbbbbbbbbbbB',
+  'bbbbibbbbbbbbbbb',
+  'bbbbbBbbbbbbbbbb',
+  'bbbbbbbbbbbbbbbb',
+  'bbbbbbbbbibbbbbb',
+  'bbbbbbbbbbBbbbbb',
+])
+
+const deep0 = sprite([
+  'BBBBBBBBBBBBBBBB',
+  'BBBBiiBBBBBBBBBB',
+  'BBBBBddBBBBddBBB',
+  'BBBBBBBBBBddddBB',
+  'BBBBBBBBBBBddBBB',
+  'BiBBBBBBBBBBBBBB',
+  'BBdBBBBBiBBBBBBB',
+  'BBBBBBBBBdBBBBBB',
+  'BBddBBBBBBBBBBBB',
+  'BddddBBBBBBBBiiB',
+  'BBddBBBBBBBBBBdd',
+  'BBBBBBBBBBBBBBBB',
+  'BBBBBdBBBBBBBBBB',
+  'BBBBBBBBBBddBBBB',
+  'BBBBBBBBBddddBBB',
+  'BBiBBBBBBBddBBBB',
+])
+
+const deep1 = sprite([
+  'BBBBBBBBBBBBBBBB',
+  'BBBBBiiBBBBBBBBB',
+  'BBBBBBddBBBddBBB',
+  'BBBBBBBBBBddddBB',
+  'BBBBBBBBBBBddBBB',
+  'BBiBBBBBBBBBBBBB',
+  'BBBdBBBBBiBBBBBB',
+  'BBBBBBBBBBdBBBBB',
+  'BBddBBBBBBBBBBBB',
+  'BddddBBBBBBBBBii',
+  'BBddBBBBBBBBBBBd',
+  'BBBBBBBBBBBBBBBB',
+  'BBBBBBdBBBBBBBBB',
+  'BBBBBBBBBBddBBBB',
+  'BBBBBBBBBddddBBB',
+  'BBBiBBBBBBddBBBB',
+])
+
+const deep2 = sprite([
+  'BBBBBBBBBBBBBBBB',
+  'BBBBBiBBBBBBBBBB',
+  'BBBBBBdBBBBddBBB',
+  'BBBBBBBBBBddddBB',
+  'BBBBBBBBBBBddBBB',
+  'BBBBBBBBBBBBBBBB',
+  'BBBdBBBBBBBBBBBB',
+  'BBBBBBBBBBdBBBBB',
+  'BBddBBBBBBBBBBBB',
+  'BddddBBBBBBBBBiB',
+  'BBddBBBBBBBBBBBB',
+  'BBBBBBBBBBBBBBBB',
+  'BBBBBdBBBBBBBBBB',
+  'BBBBBBBBBBddBBBB',
+  'BBBBBBBBBddddBBB',
+  'BBBBBBBBBBddBBBB',
+])
+
+// --------------------------------------------------------------- urbano
+
+const asphalt = sprite([
+  'XXXXXXXXXXXXXXXX',
+  'XXxXXXXXXXXXXXXX',
+  'XXXXXXXXXxXXXXXX',
+  'XXXXXXXXXXXXXXkX',
+  'XXXXXkXXXXXXXXXX',
+  'XXXXXXXXXXXxXXXX',
+  'XxXXXXXXXXXXXXXX',
+  'XXXXXXXXkXXXXXXX',
+  'XXXXXXXXXXXXXXxX',
+  'XXXxXXXXXXXXXXXX',
+  'XXXXXXXXXXkXXXXX',
+  'XXXXXXxXXXXXXXXX',
+  'XkXXXXXXXXXXXxXX',
+  'XXXXXXXXXXXXXXXX',
+  'XXXXXXXXXXXXkXXX',
+  'XXXXxXXXXXXXXXXX',
+])
+
+const sidewalk = sprite([
+  'AAAAAAAaAAAAAAAa',
+  'AAAAAAAaAAAAAAAa',
+  'AAxAAAAaAAAAAAAa',
+  'AAAAAAAaAAAAxAAa',
+  'AAAAAAAaAAAAAAAa',
+  'AAAAAAAaAAAAAAAa',
+  'AAAAAxAaAAAAAAAa',
+  'aaaaaaaaaaaaaaaa',
+  'AAAAAAAaAAAAAAAa',
+  'AAAAAAAaAAxAAAAa',
+  'AAAAAAAaAAAAAAAa',
+  'AxAAAAAaAAAAAAAa',
+  'AAAAAAAaAAAAAAAa',
+  'AAAAAAAaAAAAAxAa',
+  'AAAAAAAaAAAAAAAa',
+  'aaaaaaaaaaaaaaaa',
+])
+
+const wood = sprite([
+  'ttttttttUttttttt',
+  'uuuuuuuuUuuuuuuu',
+  'uuUuuuuuUuuuuuuu',
+  'UUUUUUUUUUUUUUUU',
+  'ttttUttttttttttt',
+  'uuuuUuuuuuuuuuuu',
+  'uuuuUuuuuuuUuuuu',
+  'UUUUUUUUUUUUUUUU',
+  'ttttttttttttUttt',
+  'uuuuuuuuuuuuUuuu',
+  'uuuuuuuuuuuuUuuu',
+  'UUUUUUUUUUUUUUUU',
+  'ttUttttttttttttt',
+  'uuUuuuuuuuuuuuuu',
+  'uuUuuuuuuUuuuuuu',
+  'UUUUUUUUUUUUUUUU',
+])
+
+// -------------------------------------------------------------- natura
+
+const hedge = sprite([
+  'vGgVvGGvgGvVgGvg',
+  'GVVGgVVGVvGVVGVG',
+  'VGVVVGVVGVVGVVGV',
+  'GVVGVVGVVGVGVVVG',
+  'VVGVVVVGVVVVGVVV',
+  'GVVVGVVVGVVGVVGV',
+  'VGVVVVGVVVGVVVVG',
+  'VVVGVVVVGVVVGVVV',
+  'TVVVVTVVVVTVVVVT',
+  'VTVGVVVTVGVVVTVV',
+  'VVVVTVVVVVTVVVVV',
+  'TVVGVVTVVGVVTVGV',
+  'VTVVVTVVVTVVVVTV',
+  'VVTVVVVTVVVTVVVV',
+  'TVTVTVTVTVTVTVTV',
+  'TTVTTTVTTTVTTTVT',
+])
+
+const rock = sprite([
+  'CCCCCnCCCCCCcCCC',
+  'CccccnCCCCccnnCC',
+  'CCCCCCnCCCcnCCNC',
+  'CCcCCCnnCCnCCCCC',
+  'CCCCCCCCnnCCccCC',
+  'CnnCCCCcnCCCCCCC',
+  'CCCnnCCnCCCCCnnC',
+  'CCCCCnnCCCCnnCCC',
+  'CcCCCCCCCnnCCCNC',
+  'CCCCcCCCnCCCCNCC',
+  'CCnCCCCnCCcCCCCC',
+  'CCCnCCCCnnCCCCnC',
+  'CCCCnnCCCCnCCnCC',
+  'CnCCCCnnCCCnnCCC',
+  'CCCcCCCCCCCCCCcC',
+  'CCCCCnCCCcCCCCCC',
+])
+
+const snow = sprite([
+  'wwwwwwwwwwwwwwww',
+  'wwwwAwwwwwwwwwww',
+  'wwwwwwwwwwwAAwww',
+  'wiwwwwwwwwwwwwww',
+  'wwwwwwwwwwwwwwww',
+  'wwwwwwAAwwwwwwiw',
+  'wwwwwwwAwwwwwwww',
+  'wwwwwwwwwwwwwwww',
+  'wAAwwwwwwwwwwwww',
+  'wwwwwwwwwwiwwwww',
+  'wwwwwwwwwwwwwAww',
+  'wwwwiwwwwwwwwwww',
+  'wwwwwwwwAwwwwwww',
+  'wwwwwwwwwwwwwwww',
+  'wwAwwwwwwwwwAAww',
+  'wwwwwwwwwwwwwwww',
+])
+
+// ---------------------------------------------------------------------
+
+export const TILES: Record<TileKey, TileSpec> = {
+  grass: { frames: [grass] },
+  grass2: { frames: [grass2] },
+  tallGrass: { frames: [tallGrass] },
+  flowers: { frames: [flowers] },
+  path: { frames: [path] },
+  pathStones: { frames: [pathStones] },
+  cobble: { frames: [cobble] },
+  plaza: { frames: [plaza] },
+  sand: { frames: [sand] },
+  sandWet: { frames: [sandWet] },
+  water: { frames: [water0, water1, water2] },
+  deepWater: { frames: [deep0, deep1, deep2] },
+  asphalt: { frames: [asphalt] },
+  sidewalk: { frames: [sidewalk] },
+  wood: { frames: [wood] },
+  hedge: { frames: [hedge] },
+  rock: { frames: [rock] },
+  snow: { frames: [snow] },
+}

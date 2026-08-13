@@ -1,32 +1,37 @@
-# React + TypeScript + Vite
+# Rosa & Francesco ✦
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Un regalo in due atti, online su **https://paco-danes.github.io/rosa-e-francesco/**
 
-Currently, two official plugins are available:
+1. **L'attesa** — la pagina countdown "notte stellata" verso il **15 settembre 2026**, con il bloom clock che sboccia giorno per giorno.
+2. **Il viaggio** — la cartuccia segreta in fondo alla pagina avvia il minigioco: Rosa in versione pixel cammina per le città della nostra storia (Losanna, Santa Maria delle Mole, Cocuruzzo, Budapest — in barca sul Danubio —, Milano, Torvaianica) e legge i cartelli che aprono i ricordi.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Più le sezioni: **pensieri dolci** (lettere), **ricordi** (polaroid), **noi** (contatori dall'8 agosto 2025).
 
-## React Compiler
+L'ingresso è protetto da una domanda dolce (risposta: *mameli*, maiuscole/minuscole indifferenti — è solo un cancelletto gentile, non vera sicurezza: il sito e le foto restano pubblici per chi ha il link).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✏️ Come personalizzare (le uniche cose da toccare)
 
-## Expanding the Oxlint configuration
+| Cosa | Dove |
+| --- | --- |
+| Testi/date dei ricordi nel gioco | `src/content/memories.ts` |
+| Lettere di "pensieri dolci" (aggiungine quando vuoi!) | `src/content/letters.ts` |
+| Motivi del bottone "un motivo per cui ti amo" | `src/content/reasons.ts` |
+| Foto vere | metti i file in `public/photos/` al posto degli `.svg` segnaposto (stesso nome; se usi `.jpg` aggiorna il campo `photo` in `memories.ts`) |
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Dopo ogni modifica:
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+git add -A && git commit -m "aggiorno contenuti" && git push
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Il deploy su GitHub Pages parte da solo (1-2 minuti).
+
+## Sviluppo
+
+```bash
+npm install
+npm run dev      # anteprima locale
+npm run build    # build di produzione
+```
+
+Struttura: `src/countdown/` pagina countdown · `src/game/` motore + arte pixel + mappe · `src/sections/` sezioni satellite · `src/content/` **tutti i contenuti modificabili**.

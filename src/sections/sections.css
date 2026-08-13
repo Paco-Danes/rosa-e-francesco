@@ -1,0 +1,618 @@
+/* ─────────────────────────────────────────────────────────────
+   SEZIONI SATELLITE — Pensieri dolci · Ricordi · Noi
+   Stile comune: notte stellata, serif, accenti oro/rosa.
+   ───────────────────────────────────────────────────────────── */
+
+.sez {
+  position: relative;
+  min-height: 100%;
+  padding: 4.5rem 1.25rem 4rem;
+  overflow-x: hidden;
+  background: radial-gradient(120% 120% at 50% 0%, var(--notte2) 0%, var(--notte1) 60%, var(--notte0) 100%);
+}
+
+.sez__stars {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 20%, #fff9, transparent 60%),
+    radial-gradient(1px 1px at 30% 65%, #fff7, transparent 60%),
+    radial-gradient(2px 2px at 48% 12%, #ffd98f88, transparent 60%),
+    radial-gradient(1px 1px at 62% 40%, #fff8, transparent 60%),
+    radial-gradient(1.5px 1.5px at 76% 74%, #ff9eb877, transparent 60%),
+    radial-gradient(1px 1px at 88% 26%, #fff6, transparent 60%),
+    radial-gradient(1.5px 1.5px at 20% 85%, #ffd98f66, transparent 60%),
+    radial-gradient(1px 1px at 55% 88%, #fff7, transparent 60%),
+    radial-gradient(1px 1px at 70% 8%, #fff5, transparent 60%),
+    radial-gradient(1.5px 1.5px at 5% 50%, #fff8, transparent 60%),
+    radial-gradient(1px 1px at 94% 55%, #fff6, transparent 60%),
+    radial-gradient(1px 1px at 40% 35%, #ff9eb855, transparent 60%);
+  animation: sez-twinkle 6s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes sez-twinkle {
+  from { opacity: 0.45; }
+  to   { opacity: 1; }
+}
+
+.sez__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.sez__back {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 40;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid #ffd98f44;
+  background: #0d0820cc;
+  backdrop-filter: blur(6px);
+  color: var(--oro);
+  font-family: var(--serif);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.sez__back:hover {
+  transform: translateY(-1px);
+  border-color: var(--oro);
+  box-shadow: 0 0 18px #ffd98f2e;
+}
+
+.sez__title {
+  text-align: center;
+  font-size: clamp(1.9rem, 5vw, 2.7rem);
+  font-weight: 600;
+  color: var(--oro);
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 30px #ffd98f33;
+}
+
+.sez__sub {
+  text-align: center;
+  font-style: italic;
+  opacity: 0.75;
+  margin-top: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.sez__whisper {
+  text-align: center;
+  font-style: italic;
+  color: var(--rosa);
+  opacity: 0.8;
+  margin-top: 3.2rem;
+  font-size: 1.02rem;
+  letter-spacing: 0.04em;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PENSIERI DOLCI — muro di buste
+   ───────────────────────────────────────────────────────────── */
+
+.buste {
+  margin-top: 2.6rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 2.2rem 1.8rem;
+  justify-items: center;
+}
+
+.busta {
+  position: relative;
+  width: 100%;
+  max-width: 16.5rem;
+  aspect-ratio: 16 / 10.5;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--serif);
+  perspective: 700px;
+  transition: transform 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.busta:hover { transform: translateY(-4px) rotate(-0.6deg); }
+.busta:focus-visible { outline: 2px solid var(--oro); outline-offset: 6px; border-radius: 6px; }
+
+/* corpo della busta, carta crema */
+.busta__corpo {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: linear-gradient(160deg, #f7efdd 0%, #efe3c9 55%, #e6d6b6 100%);
+  box-shadow:
+    inset 0 0 0 1px #d9c7a2,
+    0 10px 24px #00000066,
+    0 0 34px #ffd98f14;
+  overflow: hidden;
+}
+
+/* pieghe laterali e inferiore (i lembi interni della busta) */
+.busta__corpo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, #efe2c6 49.7%, transparent 50.3%) left / 51% 100% no-repeat,
+    linear-gradient(-115deg, #efe2c6 49.7%, transparent 50.3%) right / 51% 100% no-repeat;
+  opacity: 0.9;
+}
+.busta__corpo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #f4ead3 0%, #f4ead3 34%, transparent 60%);
+  clip-path: polygon(0 100%, 100% 100%, 50% 42%);
+  box-shadow: inset 0 1px 0 #d9c7a2;
+}
+
+/* il foglietto che spunta quando la busta si apre */
+.busta__foglietto {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 8%;
+  bottom: 12%;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #fffaf0, #f6eeda);
+  box-shadow: 0 2px 8px #00000033;
+  transform: translateY(12%);
+  transition: transform 0.45s cubic-bezier(0.22, 1.2, 0.36, 1) 0.18s;
+  background-image:
+    linear-gradient(180deg, #fffaf0, #f6eeda),
+    none;
+}
+.busta__foglietto::before {
+  content: '';
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  top: 18%;
+  height: 46%;
+  background: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 7px,
+    #c9b48d88 7px,
+    #c9b48d88 8px
+  );
+  opacity: 0.8;
+}
+
+.busta.aperta .busta__foglietto { transform: translateY(-34%); }
+
+/* linguetta superiore */
+.busta__linguetta {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 58%;
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform 0.4s ease;
+  z-index: 3;
+}
+.busta__linguetta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #f2e7cf 0%, #e9dabb 80%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 2px 3px #00000030);
+  border-radius: 6px 6px 0 0;
+}
+
+.busta.aperta .busta__linguetta {
+  transform: rotateX(168deg);
+  z-index: 1;
+  transition: transform 0.4s ease;
+}
+
+/* sigillo di ceralacca */
+.busta__sigillo {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 2.15rem;
+  height: 2.15rem;
+  transform: translate(-50%, -50%) rotate(-6deg);
+  border-radius: 47% 53% 50% 50% / 52% 48% 52% 48%;
+  background: radial-gradient(circle at 34% 30%, #ff9eb8, #e86a92 45%, #b8436b 100%);
+  box-shadow:
+    inset 0 -2px 4px #7d2547aa,
+    inset 0 2px 3px #ffc3d4aa,
+    0 2px 6px #00000055;
+  display: grid;
+  place-items: center;
+  color: #ffe3ec;
+  font-size: 0.95rem;
+  line-height: 1;
+  z-index: 4;
+  transition: opacity 0.25s, transform 0.35s;
+  text-shadow: 0 1px 2px #8c2b4f;
+}
+
+.busta.aperta .busta__sigillo {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(18deg) scale(0.6);
+}
+
+/* etichetta sotto la busta */
+.busta__nome {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1.9rem;
+  text-align: center;
+  color: var(--crema);
+  opacity: 0.85;
+  font-size: 1.02rem;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+}
+
+/* ── lettera espansa (overlay) ── */
+.lettera-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: #070512cc;
+  backdrop-filter: blur(4px);
+  animation: lettera-velo 0.3s ease both;
+}
+
+@keyframes lettera-velo {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lettera {
+  position: relative;
+  width: 100%;
+  max-width: 34rem;
+  max-height: min(82vh, 42rem);
+  overflow-y: auto;
+  border-radius: 8px;
+  padding: 2.4rem 2.2rem 2.2rem;
+  background:
+    linear-gradient(160deg, #fffaf0 0%, #f7edd8 70%, #f0e3c6 100%);
+  color: #3b2f1e;
+  box-shadow: 0 24px 70px #000000aa, 0 0 50px #ffd98f1e;
+  animation: lettera-esce 0.55s cubic-bezier(0.2, 1.1, 0.3, 1) both;
+}
+
+@keyframes lettera-esce {
+  from {
+    opacity: 0;
+    transform: translateY(3.5rem) scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.lettera__titolo {
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: #8a5a17;
+  letter-spacing: 0.03em;
+}
+
+.lettera__data {
+  font-style: italic;
+  color: #b8436b;
+  margin-top: 0.2rem;
+  font-size: 1rem;
+}
+
+.lettera__filo {
+  margin: 1rem 0 1.2rem;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a86155, #c9a861aa, #c9a86155, transparent);
+}
+
+.lettera__corpo p {
+  margin: 0 0 0.95rem;
+  font-size: 1.14rem;
+  line-height: 1.62;
+}
+.lettera__corpo p:last-child { margin-bottom: 0; }
+
+.lettera__chiudi {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.8rem;
+  border: none;
+  background: none;
+  color: #b8436b;
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.3rem;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.lettera__chiudi:hover { opacity: 1; transform: scale(1.12); }
+
+/* ─────────────────────────────────────────────────────────────
+   RICORDI — polaroid sparse
+   ───────────────────────────────────────────────────────────── */
+
+.polaroids {
+  margin-top: 2.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.4rem 1.9rem;
+  padding-bottom: 1rem;
+}
+
+.polaroid {
+  border: none;
+  padding: 0.65rem 0.65rem 0.5rem;
+  width: clamp(9.5rem, 26vw, 13.5rem);
+  background: linear-gradient(175deg, #fdfbf6, #f1ece0);
+  box-shadow: 0 12px 28px #00000077, 0 0 0 1px #00000014;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: var(--serif);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.polaroid:hover {
+  transform: rotate(calc(var(--rot, 0deg) * 0.3)) translateY(-6px) scale(1.045);
+  box-shadow: 0 20px 40px #00000088, 0 0 30px #ffd98f1c;
+  z-index: 5;
+  position: relative;
+}
+.polaroid:focus-visible { outline: 2px solid var(--oro); outline-offset: 4px; }
+
+.polaroid__foto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #ddd3bd;
+  border-radius: 1px;
+  box-shadow: inset 0 0 12px #00000022;
+}
+
+.polaroid__dida {
+  padding: 0.55rem 0.2rem 0.35rem;
+  text-align: center;
+  color: #4a3d28;
+  font-style: italic;
+  line-height: 1.25;
+}
+
+.polaroid__dida strong {
+  display: block;
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+
+.polaroid__dida span {
+  font-size: 0.88rem;
+  color: #8a7455;
+}
+
+/* ── polaroid in primo piano ── */
+.polaroid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: #070512cc;
+  backdrop-filter: blur(4px);
+  animation: lettera-velo 0.3s ease both;
+  touch-action: none;
+  overflow: hidden;
+}
+
+.polaroid--grande {
+  width: min(76vw, 24rem);
+  padding: 0.9rem 0.9rem 0.7rem;
+  cursor: grab;
+  transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--rot, 0deg));
+  animation: polaroid-sale 0.4s cubic-bezier(0.2, 1.1, 0.3, 1) both;
+  transition: none;
+  box-shadow: 0 30px 70px #000000aa, 0 0 44px #ffd98f22;
+  user-select: none;
+}
+.polaroid--grande:hover { transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--rot, 0deg)); }
+.polaroid--grande.trascina { cursor: grabbing; }
+.polaroid--grande .polaroid__foto { pointer-events: none; }
+
+@keyframes polaroid-sale {
+  from { opacity: 0; scale: 0.6; }
+  to   { opacity: 1; scale: 1; }
+}
+
+.polaroid--grande .polaroid__dida strong { font-size: 1.25rem; }
+.polaroid--grande .polaroid__dida span { font-size: 1rem; }
+
+.polaroid-overlay__hint {
+  position: absolute;
+  bottom: 1.1rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--crema);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   NOI — contatori vivi
+   ───────────────────────────────────────────────────────────── */
+
+.noi {
+  text-align: center;
+}
+
+.noi__giorni {
+  margin-top: 3rem;
+}
+
+.noi__giorni-num {
+  font-size: clamp(4.2rem, 16vw, 7.5rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--oro);
+  text-shadow: 0 0 40px #ffd98f44, 0 0 90px #f2b13c22;
+  font-variant-numeric: tabular-nums;
+}
+
+.noi__giorni-label {
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  font-style: italic;
+  opacity: 0.85;
+  margin-top: 0.3rem;
+  letter-spacing: 0.06em;
+}
+
+.noi__hms {
+  margin-top: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.6rem 0.9rem;
+  flex-wrap: wrap;
+}
+
+.noi__hms-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.noi__hms-num {
+  font-size: clamp(1.7rem, 6vw, 2.4rem);
+  font-weight: 600;
+  color: var(--rosa);
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 24px #e86a9244;
+}
+
+.noi__hms-label {
+  font-style: italic;
+  opacity: 0.7;
+  font-size: 1rem;
+}
+
+.noi__hms-dot {
+  color: var(--oro);
+  opacity: 0.6;
+  font-size: 1.2rem;
+}
+
+.noi__derivate {
+  margin: 2.6rem auto 0;
+  max-width: 30rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.noi__derivata {
+  padding: 0.95rem 1.3rem;
+  border: 1px solid #ffd98f24;
+  border-radius: 14px;
+  background: #0d082077;
+  backdrop-filter: blur(4px);
+}
+
+.noi__derivata-num {
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--oro);
+  font-variant-numeric: tabular-nums;
+}
+
+.noi__derivata-label {
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 1.05rem;
+  margin-top: 0.1rem;
+}
+
+.noi__nota {
+  margin-top: 1.2rem;
+  font-size: 0.88rem;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.noi__motivo-btn {
+  margin-top: 3rem;
+  padding: 0.8rem 2.2rem;
+  border-radius: 999px;
+  border: 1px solid #ffd98f55;
+  background: linear-gradient(135deg, #f2b13c22, #e86a9222);
+  color: var(--oro);
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.noi__motivo-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 26px #ffd98f33;
+}
+.noi__motivo-btn:active { transform: translateY(0); }
+
+.noi__motivo {
+  margin: 1.6rem auto 0;
+  max-width: 32rem;
+  min-height: 3.4rem;
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  font-style: italic;
+  color: var(--rosa);
+  line-height: 1.5;
+  text-shadow: 0 0 26px #e86a9233;
+  animation: motivo-fade 0.9s ease both;
+}
+
+@keyframes motivo-fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* piccoli schermi */
+@media (max-width: 480px) {
+  .sez { padding-top: 4.2rem; }
+  .buste { gap: 2.5rem 1.2rem; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); }
+  .lettera { padding: 1.9rem 1.4rem 1.6rem; }
+}
