@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  background: radial-gradient(120% 120% at 50% 0%, #1b1035 0%, #0d0820 60%, #070512 100%);
+  color: #f3e9dc;
+  overflow: hidden;
+}
