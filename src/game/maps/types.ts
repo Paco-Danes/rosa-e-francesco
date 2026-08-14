@@ -20,6 +20,7 @@ import type { MemoryId } from '../../content/memories'
 export type SceneId =
   | 'overworld'
   | 'lausanne'
+  | 'sauvabelin'
   | 'smdm'
   | 'cocuruzzo'
   | 'danubio'

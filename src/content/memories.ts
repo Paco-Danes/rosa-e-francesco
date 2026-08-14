@@ -13,6 +13,7 @@ export type MemoryId =
   | 'lau-flon'
   | 'lau-olimpico'
   | 'lau-migros'
+  | 'lau-sauvabelin'
   | 'smdm-piazza'
   | 'smdm-casa-rosa'
   | 'smdm-gabbiano'
@@ -84,6 +85,15 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     place: 'Una piccola Migros di Losanna',
     text: 'La spesa insieme: tu con la lista, io che aggiungevo cose a caso nel carrello. Le cose più normali, con te, sono le mie preferite.',
     photo: 'lau-migros.svg',
+  },
+
+  'lau-sauvabelin': {
+    city: 'Losanna',
+    title: 'La Torre di Sauvabelin',
+    date: 'Autunno 2025',
+    place: 'Tour de Sauvabelin, nel bosco sopra Losanna',
+    text: 'Gradino di legno dopo gradino, fino sopra le cime degli alberi: il lago, le Alpi e i tetti di Losanna tutti in una volta. Il mondo, da lassù, sembrava fatto apposta per guardarlo in due.',
+    photo: 'lau-sauvabelin.svg',
   },
 
   // ─── Santa Maria delle Mole — «Casa» ───
