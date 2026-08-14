@@ -252,6 +252,14 @@
   width: 100%;
 }
 
+/* su schermi larghi il fiore è grande: lo si abbassa un po' perché non
+   copra le stelline R e F in viaggio sull'arco */
+@media (min-width: 760px) {
+  .cd-center {
+    padding-top: clamp(3.5rem, 11vh, 7rem);
+  }
+}
+
 .bloom {
   position: relative;
   line-height: 0;
