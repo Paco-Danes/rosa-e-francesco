@@ -33,7 +33,7 @@ export default function MemoryCard({ id, onClose }: { id: MemoryId; onClose: () 
     return null
   }
 
-  const src = import.meta.env.BASE_URL + 'photos/' + m.photo
+  const src = import.meta.env.BASE_URL + 'photos/' + m.photos[0]
 
   return (
     <div className="rf-memory" onClick={onClose}>

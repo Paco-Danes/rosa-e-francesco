@@ -202,9 +202,9 @@ export const overworldScene: Scene = {
       x: 24,
       y: 25,
       kind: 'wood',
-      label: 'Santa Maria delle Mole — Casa',
+      label: 'Roma, Santa Maria e dintorni — Casa',
       lines: [
-        'La rotonda, la piazza, il posto dove il cuore parcheggia.',
+        'La rotonda, il Colosseo, i laghi, la neve: tutto il nostro mondo di casa.',
         'Entra: casa è dove sei tu.',
       ],
     },

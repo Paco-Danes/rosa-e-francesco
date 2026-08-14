@@ -417,6 +417,26 @@ const rock = sprite([
   'CCCCCnCCCcCCCCCC',
 ])
 
+// ghiaccio della pista: lucido, azzurro chiarissimo, con graffi di pattini
+const ice = sprite([
+  'iiiiiiiiiiiiiiii',
+  'iiwwiiiiiiiiiiii',
+  'iiiiwwiiiiiAiiii',
+  'iiiiiiiiiiiiiiii',
+  'iAiiiiiiiwwiiiii',
+  'iiiiiiiiiiiwwiii',
+  'iiiiiwiiiiiiiiii',
+  'iiiiiiiiiiiiiiii',
+  'iiiiiiiiAiiiiiii',
+  'iiwwiiiiiiiiiwwi',
+  'iiiiwwiiiiiiiiiw',
+  'iiiiiiiiiiiiiiii',
+  'iiiiiiiwwiiiiiii',
+  'iAiiiiiiiwiiiiii',
+  'iiiiiiiiiiiiAiii',
+  'iiiiiiiiiiiiiiii',
+])
+
 const snow = sprite([
   'wwwwwwwwwwwwwwww',
   'wwwwAwwwwwwwwwww',
@@ -457,4 +477,5 @@ export const TILES: Record<TileKey, TileSpec> = {
   hedge: { frames: [hedge] },
   rock: { frames: [rock] },
   snow: { frames: [snow] },
+  ice: { frames: [ice] },
 }

@@ -75,7 +75,7 @@ export default function Ricordi({ onBack }: SectionProps) {
               >
                 <img
                   className="polaroid__foto"
-                  src={FOTO_BASE + m.photo}
+                  src={FOTO_BASE + m.photos[0]}
                   alt={`${m.title} — ${m.city}`}
                   loading="lazy"
                   draggable={false}
@@ -116,7 +116,7 @@ export default function Ricordi({ onBack }: SectionProps) {
           >
             <img
               className="polaroid__foto"
-              src={FOTO_BASE + grande.photo}
+              src={FOTO_BASE + grande.photos[0]}
               alt={`${grande.title} — ${grande.city}`}
               draggable={false}
             />

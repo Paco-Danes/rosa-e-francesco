@@ -56,6 +56,7 @@ export type TileKey =
   | 'hedge' // siepe (di solito solid)
   | 'rock' // roccia / montagna (solid)
   | 'snow' // neve (creste alpine)
+  | 'ice' // ghiaccio della pista di pattinaggio (lucido, azzurro-bianco, animabile)
 
 export type PropKey =
   | 'tree' // albero frondoso ~32×40

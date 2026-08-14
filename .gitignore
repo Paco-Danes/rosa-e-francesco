@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# originali non ottimizzati delle foto (non pubblicati)
+photos_originali/
