@@ -104,6 +104,8 @@ export default function CountdownPage({ onStartGame, onNavigate }: CountdownPage
 
   const journey = clamp01((now - ANNIVERSARIO) / (TARGET - ANNIVERSARIO))
   const bloom = clamp01((now - BLOOM_START) / (TARGET - BLOOM_START))
+  const bloomDayTotal = Math.round((TARGET - BLOOM_START) / DAY)
+  const bloomDayNow = Math.min(bloomDayTotal, Math.max(1, Math.floor((now - BLOOM_START) / DAY) + 1))
 
   const posR = arcPoint(journey * 0.5)
   const posF = arcPoint(1 - journey * 0.5)
@@ -211,7 +213,7 @@ export default function CountdownPage({ onStartGame, onNavigate }: CountdownPage
 
       {/* il cuore della pagina: bloom clock + countdown */}
       <section className="cd-center">
-        <BloomClock bloom={bloom} celebrate={celebrate} />
+        <BloomClock bloom={bloom} celebrate={celebrate} dayNow={bloomDayNow} dayTotal={bloomDayTotal} />
 
         {celebrate ? (
           <h2 className="cd-together">

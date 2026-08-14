@@ -253,6 +253,19 @@
 }
 
 .bloom {
+  position: relative;
+  line-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bloom__hit {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
   line-height: 0;
 }
 
@@ -263,100 +276,220 @@
   filter: drop-shadow(0 0 18px rgba(255, 217, 143, 0.18)) drop-shadow(0 0 40px rgba(232, 106, 146, 0.12));
 }
 
+/* quadrante fisso */
 .bloom__ring {
   fill: none;
-  stroke: rgba(255, 217, 143, 0.18);
+  stroke: rgba(255, 217, 143, 0.24);
   stroke-width: 0.5;
   stroke-dasharray: 0.8 3.2;
-  transform-box: view-box;
-  transform-origin: 50% 50%;
-  animation: ring-turn 160s linear infinite;
 }
 
-@keyframes ring-turn {
-  to {
-    transform: rotate(360deg);
+/* le 33 tacche-giorno */
+.bloom__day {
+  stroke: rgba(255, 217, 143, 0.16);
+  stroke-width: 0.55;
+  stroke-linecap: round;
+  transition: stroke 0.8s ease;
+}
+
+.bloom__day--lit {
+  stroke: rgba(255, 217, 143, 0.8);
+}
+
+/* la stellina di oggi */
+.bloom__todayStar {
+  fill: #fff2cf;
+  filter: drop-shadow(0 0 3px rgba(255, 217, 143, 0.9));
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: today-twinkle 2.4s ease-in-out infinite;
+}
+
+@keyframes today-twinkle {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
   }
 }
 
-.bloom__tick {
-  fill: rgba(255, 217, 143, 0.3);
+/* petali: silhouette sempre visibili, entrata scaglionata al mount */
+.bloom__petalG {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.bloom__petalG--in {
+  opacity: 1;
 }
 
 .bloom__petal {
-  transform-box: view-box;
-  transform-origin: 50% 50%;
-  transform: rotate(calc((1 - var(--open, 0)) * -24deg)) scale(calc(0.15 + 0.85 * var(--open, 0)));
-  stroke-width: 0.9;
+  fill: rgba(255, 217, 143, 0.05);
+  stroke: rgba(255, 217, 143, 0.55);
+  stroke-width: 0.7;
   stroke-linejoin: round;
-  stroke-opacity: calc(0.3 + 0.7 * var(--open, 0));
-  fill-opacity: calc(0.08 + 0.34 * var(--open, 0));
-  transition:
-    transform 1.6s cubic-bezier(0.22, 1, 0.36, 1),
-    stroke-opacity 1.6s ease,
-    fill-opacity 1.6s ease;
+  stroke-opacity: calc(0.75 + 0.25 * var(--o, 0));
+  transition: stroke-opacity 1.4s ease;
 }
 
-.bloom__petal--oro {
-  stroke: var(--oro);
+/* la luce che riempie il petalo dal basso, come un liquido */
+.bloom__fill {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transform: scaleY(var(--o, 0));
+  opacity: 0.92;
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bloom__fill--oro {
   fill: url(#bloom-oro);
 }
 
-.bloom__petal--rosa {
-  stroke: var(--rosa);
+.bloom__fill--rosa {
   fill: url(#bloom-rosa);
 }
 
 .bloom__vein {
   fill: none;
-  stroke: rgba(243, 234, 217, 0.55);
+  stroke: rgba(84, 58, 120, 0.4);
   stroke-width: 0.35;
   stroke-linecap: round;
-  transform-box: view-box;
+  opacity: calc(0.75 * var(--o, 0));
+  transition: opacity 1.4s ease;
+}
+
+/* il cuore del fiore: lub-dub, poi una pausa */
+.bloom__heartGlow {
+  transform-box: fill-box;
   transform-origin: 50% 50%;
-  transform: rotate(calc((1 - var(--open, 0)) * -24deg)) scale(calc(0.15 + 0.85 * var(--open, 0)));
-  opacity: calc(0.65 * var(--open, 0));
-  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.6s ease;
+  animation: heart-glow 2s ease-in-out infinite;
 }
 
-.bloom__coreWrap {
-  transform-box: view-box;
+.bloom__heartBeat {
+  transform-box: fill-box;
   transform-origin: 50% 50%;
-  animation: core-pulse 3.4s ease-in-out infinite;
+  animation: heart-lubdub 2s ease-in-out infinite;
 }
 
-.bloom__coreGlow {
-  fill: rgba(255, 217, 143, 0.16);
-  animation: core-glow 3.4s ease-in-out infinite;
-}
-
-.bloom__core {
-  stroke: rgba(255, 242, 207, 0.8);
+.bloom__heart--oro {
+  fill: url(#bloom-oro);
+  stroke: rgba(255, 242, 207, 0.75);
   stroke-width: 0.4;
+  stroke-linejoin: round;
 }
 
-.bloom__coreDot {
-  fill: rgba(255, 255, 255, 0.75);
+.bloom__heart--rosa {
+  fill: url(#bloom-rosa);
+  transition: opacity 1.2s ease;
 }
 
-@keyframes core-pulse {
-  0%,
-  100% {
+@keyframes heart-lubdub {
+  0% {
     transform: scale(1);
   }
-  50% {
-    transform: scale(1.07);
+  7% {
+    transform: scale(1.06); /* lub — il battito piccolo */
+  }
+  14% {
+    transform: scale(1);
+  }
+  24% {
+    transform: scale(1.17); /* DUB — il battito grande */
+  }
+  38% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1); /* la pausa tra una coppia e l'altra */
   }
 }
 
-@keyframes core-glow {
+@keyframes heart-glow {
   0%,
+  38%,
   100% {
-    fill: rgba(255, 217, 143, 0.12);
+    opacity: 0.45;
+    transform: scale(1);
   }
-  50% {
-    fill: rgba(255, 217, 143, 0.26);
+  24% {
+    opacity: 1;
+    transform: scale(1.25);
   }
+}
+
+/* la spiegazione sussurrata */
+.bloom__hint {
+  margin-top: 0.55rem;
+  font-style: italic;
+  font-size: clamp(0.78rem, 1.9vw, 0.92rem);
+  line-height: 1.35;
+  color: rgba(243, 234, 217, 0.55);
+  text-align: center;
+  max-width: 36ch;
+}
+
+/* la mini-card coi numeri vivi */
+.bloom__card {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  width: max-content;
+  max-width: min(22rem, 86vw);
+  padding: 0.8rem 1.1rem;
+  border: 1px solid rgba(255, 217, 143, 0.28);
+  border-radius: 14px;
+  background: rgba(13, 8, 32, 0.93);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  line-height: 1.45;
+  text-align: center;
+  animation: card-in 0.25s ease;
+  pointer-events: none;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 4px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.bloom__cardTitle {
+  font-variant: small-caps;
+  letter-spacing: 0.14em;
+  color: var(--oro);
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.bloom__cardRow {
+  font-style: italic;
+  font-size: 0.88rem;
+  color: rgba(243, 234, 217, 0.8);
+}
+
+.bloom__cardNums {
+  margin-top: 0.3rem;
+  font-size: 0.9rem;
+  color: rgba(243, 234, 217, 0.85);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.bloom__cardNums strong {
+  color: var(--rosa);
+  font-weight: 600;
 }
 
 /* countdown */
@@ -770,8 +903,9 @@
 /* ── prefers-reduced-motion: solo twinkle lento, niente deriva/scie ── */
 @media (prefers-reduced-motion: reduce) {
   .sky-arc__path,
-  .bloom__ring,
-  .bloom__coreWrap,
+  .bloom__heartBeat,
+  .bloom__heartGlow,
+  .bloom__todayStar,
   .cart,
   .cart__svg,
   .cd-foot__whisper,
@@ -787,6 +921,7 @@
   }
 
   .bloom__petal,
+  .bloom__fill,
   .bloom__vein {
     transition-duration: 0.6s;
   }
