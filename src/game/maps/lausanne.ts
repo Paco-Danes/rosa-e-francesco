@@ -3,6 +3,8 @@
  * La città dove la storia è cominciata: la Cattedrale sulla terrazza a nord,
  * il Flon a ovest, il Museo Olimpico verso il lago, la piccola Migros
  * di ogni settimana e, a sud, il Lemano con il lungolago di Ouchy.
+ * In alto a destra, il bosco di Sauvabelin con la sua torre di legno:
+ * un sentiero si insinua tra i pini fino alla porta.
  */
 import type { Scene } from './types'
 import {
@@ -11,13 +13,15 @@ import {
   flonBSprite,
   museumSprite,
   migrosSprite,
+  sauvabelinTowerSprite,
+  gioeleFrames,
 } from '../art/buildings/lausanne'
 
 export const lausanneScene: Scene = {
   id: 'lausanne',
   name: 'Losanna — Dove il lago ci ha visti',
-  width: 28,
-  height: 22,
+  width: 30,
+  height: 24,
   ambience: 'day',
 
   legend: {
@@ -36,30 +40,32 @@ export const lausanneScene: Scene = {
     W: { base: 'deepWater', solid: true },
   },
 
-  //           x: 0123456789012345678901234567
+  //           x: 012345678901234567890123456789
   ground: [
-    /*  0 */ 'hhgGgfgggggGggtgGggfgGgggghh',
-    /*  1 */ 'hgggGgggtfgggGggggtfgggGgggh',
-    /*  2 */ 'ggGgtgggGggggggggggGgggtgGgg',
-    /*  3 */ 'gfgggGgtGgggggggggggtgGgfggg',
-    /*  4 */ 'ggggggggPPPPPPPPPPPPgGgfggGg',
-    /*  5 */ 'ggggggggPPPPPPPPPPPPggGggtgg',
-    /*  6 */ 'ggggggggPPPPPPPPPPPPgfggGggg',
-    /*  7 */ 'ggggggggPPPPPPPPPPPPggggfgGg',
-    /*  8 */ 'sssssssssfGfrrrrgfGggGgfgtgg',
-    /*  9 */ 'cccccccccccccccccccccccccccc',
-    /* 10 */ 'cccccccccccccccccccccccccccc',
-    /* 11 */ 'gGfgggfgGggggppgfGggggggGgfg',
-    /* 12 */ 'fgtgGggfgggggppfggfggggggfgG',
-    /* 13 */ 'gGgfgggGgggggppgggggggggGggf',
-    /* 14 */ 'ggfgGgtgfsssgppgfggggggggfgG',
-    /* 15 */ 'GgfgggfgGgfggppgfgsssssssggf',
-    /* 16 */ 'ssssssssssssssssssssssssssss',
-    /* 17 */ 'ssssssssssssssssssssssssssss',
-    /* 18 */ 'gppgwwwwwwwwwoowwwwwwwwwwwww',
-    /* 19 */ 'gppgwwWwwwwWwoowwWwwwwwWwwww',
-    /* 20 */ 'gppgWwwwwwWwwooWwWwwwwwwWwWw',
-    /* 21 */ 'gppgWWWWWWWWWWWWWWWWWWWWWWWW',
+    /*  0 */ 'hhhhhhhhhhhhhhhhhhhhhggggggggh',
+    /*  1 */ 'hgGggtggGgggggGgtggggggggggggh',
+    /*  2 */ 'hhgGgfgggggGggtgGgggtggggggggh',
+    /*  3 */ 'hgggGgggtfgggGggggtfgggggggggh',
+    /*  4 */ 'ggGgtgggGggggggggggGgggtgggggh',
+    /*  5 */ 'gfgggGgtGgggggggggggggggggpggh',
+    /*  6 */ 'ggggggggPPPPPPPPPPPPgGgfgppgGh',
+    /*  7 */ 'ggggggggPPPPPPPPPPPPggGpppgtgh',
+    /*  8 */ 'ggggggggPPPPPPPPPPPPppppfgGggh',
+    /*  9 */ 'ggggggggPPPPPPPPPPPPggggfgGggh',
+    /* 10 */ 'sssssssssfGfrrrrgfGggGgfgtgggg',
+    /* 11 */ 'cccccccccccccccccccccccccccccc',
+    /* 12 */ 'cccccccccccccccccccccccccccccc',
+    /* 13 */ 'gGfgggfgGggggppgfGggggggGgfggG',
+    /* 14 */ 'fgtgGggfgggggppfggfggggggfgGfg',
+    /* 15 */ 'gGgfgggGgggggppgggggggggGggfgG',
+    /* 16 */ 'ggfgGgtgfsssgppgfggggggggfgGgf',
+    /* 17 */ 'GgfgggfgGgfggppgfgsssssssggfGg',
+    /* 18 */ 'ssssssssssssssssssssssssssssss',
+    /* 19 */ 'ssssssssssssssssssssssssssssss',
+    /* 20 */ 'gppgwwwwwwwwwoowwwwwwwwwwwwwww',
+    /* 21 */ 'gppgwwWwwwwWwoowwWwwwwwWwwwwwW',
+    /* 22 */ 'gppgWwwwwwWwwooWwWwwwwwwWwWwWw',
+    /* 23 */ 'gppgWWWWWWWWWWWWWWWWWWWWWWWWWW',
   ],
 
   buildings: [
@@ -67,99 +73,116 @@ export const lausanneScene: Scene = {
     {
       sprite: cathedralSprite,
       x: 11,
-      y: 0,
+      y: 2,
       solid: { x: 0, y: 3, w: 6, h: 3 },
     },
     // Il Flon: blocco corallo…
     {
       sprite: flonASprite,
       x: 1,
-      y: 4,
+      y: 6,
       solid: { x: 0, y: 2, w: 4, h: 2 },
     },
     // …e torre viola con la caffetteria
     {
       sprite: flonBSprite,
       x: 5,
-      y: 5,
+      y: 7,
       solid: { x: 0, y: 2, w: 3, h: 2 },
     },
     // La piccola Migros di ogni settimana
     {
       sprite: migrosSprite,
       x: 9,
-      y: 11,
+      y: 13,
       solid: { x: 0, y: 1, w: 3, h: 2 },
     },
     // Il Museo Olimpico, bianco verso il lago
     {
       sprite: museumSprite,
       x: 19,
-      y: 11,
+      y: 13,
       solid: { x: 0, y: 2, w: 5, h: 2 },
+    },
+    // La Torre di Sauvabelin, di legno sopra il bosco: la porta in basso
+    // resta libera, l'exit è sul sentiero davanti all'ingresso
+    {
+      sprite: sauvabelinTowerSprite,
+      x: 25,
+      y: 0,
+      solid: { x: 0, y: 3, w: 3, h: 2 },
     },
   ],
 
   props: [
-    // pini ordinati (molto svizzeri) sul bordo nord
-    { prop: 'pine', x: 0, y: 3 },
-    { prop: 'pine', x: 2, y: 2 },
-    { prop: 'pine', x: 5, y: 1 },
-    { prop: 'tree', x: 7, y: 3 },
-    { prop: 'tree', x: 18, y: 3 },
-    { prop: 'pine', x: 20, y: 1 },
-    { prop: 'pine', x: 23, y: 2 },
-    { prop: 'pine', x: 26, y: 3 },
-    { prop: 'pine', x: 26, y: 7 },
-    { prop: 'bush', x: 21, y: 5 },
-    { prop: 'bush', x: 25, y: 6 },
+    // il bosco di Sauvabelin, fitto sul bordo nord
+    { prop: 'pine', x: 1, y: 1 },
+    { prop: 'pine', x: 4, y: 1 },
+    { prop: 'pine', x: 9, y: 1 },
+    { prop: 'pine', x: 5, y: 3 },
+    { prop: 'pine', x: 2, y: 4 },
+    { prop: 'pine', x: 0, y: 5 },
+    { prop: 'tree', x: 7, y: 5 },
+    { prop: 'pine', x: 8, y: 2 },
+    { prop: 'tree', x: 18, y: 5 },
+    { prop: 'pine', x: 19, y: 1 },
+    { prop: 'pine', x: 23, y: 1 },
+    { prop: 'pine', x: 28, y: 1 },
+    { prop: 'pine', x: 21, y: 2 },
+    { prop: 'pine', x: 20, y: 3 },
+    { prop: 'pine', x: 23, y: 4 },
+    { prop: 'pine', x: 28, y: 4 },
+    { prop: 'bush', x: 21, y: 7 },
+    { prop: 'pine', x: 28, y: 7 },
+    { prop: 'bush', x: 25, y: 8 },
+    { prop: 'pine', x: 26, y: 9 },
     // terrazza della Cattedrale
-    { prop: 'pot', x: 8, y: 4 },
-    { prop: 'pot', x: 19, y: 4 },
-    { prop: 'lamp', x: 9, y: 5 },
-    { prop: 'lamp', x: 18, y: 5 },
-    { prop: 'fountain', x: 17, y: 7 },
-    { prop: 'roseBush', x: 11, y: 8 },
-    { prop: 'roseBush', x: 16, y: 8 },
+    { prop: 'pot', x: 8, y: 6 },
+    { prop: 'pot', x: 19, y: 6 },
+    { prop: 'lamp', x: 9, y: 7 },
+    { prop: 'lamp', x: 18, y: 7 },
+    { prop: 'fountain', x: 17, y: 9 },
+    { prop: 'roseBush', x: 11, y: 10 },
+    { prop: 'roseBush', x: 16, y: 10 },
     // verde di mezzo
-    { prop: 'bush', x: 0, y: 11 },
-    { prop: 'tree', x: 1, y: 12 },
-    { prop: 'flowerPatch', x: 3, y: 12 },
-    { prop: 'tree', x: 5, y: 14 },
-    { prop: 'bush', x: 8, y: 12 },
-    { prop: 'cat', x: 12, y: 12 },
-    { prop: 'flowerPatch', x: 15, y: 11 },
-    { prop: 'flowerPatch', x: 16, y: 14 },
-    { prop: 'bush', x: 27, y: 11 },
-    { prop: 'flowerPatch', x: 25, y: 12 },
+    { prop: 'bush', x: 0, y: 13 },
+    { prop: 'tree', x: 1, y: 14 },
+    { prop: 'flowerPatch', x: 3, y: 14 },
+    { prop: 'tree', x: 5, y: 16 },
+    { prop: 'bush', x: 8, y: 14 },
+    { prop: 'cat', x: 12, y: 14 },
+    { prop: 'flowerPatch', x: 15, y: 13 },
+    { prop: 'flowerPatch', x: 16, y: 16 },
+    { prop: 'bush', x: 27, y: 13 },
+    { prop: 'flowerPatch', x: 25, y: 14 },
     // il piazzale del Museo Olimpico: fiamma e fontana
-    { prop: 'statue', x: 17, y: 15 },
-    { prop: 'fountain', x: 24, y: 15 },
+    { prop: 'statue', x: 17, y: 17 },
+    { prop: 'fountain', x: 24, y: 17 },
     // lungolago di Ouchy
-    { prop: 'pot', x: 0, y: 16 },
-    { prop: 'lamp', x: 4, y: 16 },
-    { prop: 'bench', x: 6, y: 16 },
-    { prop: 'lamp', x: 10, y: 16 },
-    { prop: 'lamp', x: 16, y: 16 },
-    { prop: 'bench', x: 18, y: 16 },
-    { prop: 'lamp', x: 22, y: 16 },
-    { prop: 'lamp', x: 26, y: 16 },
-    { prop: 'pot', x: 27, y: 16 },
-    { prop: 'gull', x: 5, y: 17 },
-    { prop: 'gull', x: 14, y: 17 },
+    { prop: 'pot', x: 0, y: 18 },
+    { prop: 'lamp', x: 4, y: 18 },
+    { prop: 'bench', x: 6, y: 18 },
+    { prop: 'lamp', x: 10, y: 18 },
+    { prop: 'lamp', x: 16, y: 18 },
+    { prop: 'bench', x: 18, y: 18 },
+    { prop: 'lamp', x: 22, y: 18 },
+    { prop: 'lamp', x: 26, y: 18 },
+    { prop: 'pot', x: 27, y: 18 },
+    { prop: 'gull', x: 5, y: 19 },
+    { prop: 'gull', x: 14, y: 19 },
     // il Lemano: boe e gabbiani
-    { prop: 'buoy', x: 6, y: 19 },
-    { prop: 'gull', x: 9, y: 19 },
-    { prop: 'gull', x: 17, y: 19 },
-    { prop: 'gull', x: 21, y: 18 },
-    { prop: 'buoy', x: 22, y: 20 },
-    { prop: 'buoy', x: 25, y: 18 },
+    { prop: 'buoy', x: 6, y: 21 },
+    { prop: 'gull', x: 9, y: 21 },
+    { prop: 'gull', x: 17, y: 21 },
+    { prop: 'gull', x: 21, y: 20 },
+    { prop: 'buoy', x: 22, y: 22 },
+    { prop: 'buoy', x: 25, y: 20 },
   ],
 
   signs: [
     {
       x: 9,
-      y: 6,
+      y: 8,
       label: 'Cattedrale di Losanna',
       lines: [
         'Gotica, antica, piena di gradini.',
@@ -170,14 +193,14 @@ export const lausanneScene: Scene = {
     },
     {
       x: 13,
-      y: 5,
+      y: 7,
       kind: 'none',
       label: 'Il portone della Cattedrale',
       lines: ['È socchiuso: dentro, un silenzio che profuma di candele.'],
     },
     {
       x: 8,
-      y: 8,
+      y: 10,
       label: 'Quartiere del Flon',
       lines: [
         'Vetrine, luci e musica bassa.',
@@ -187,7 +210,7 @@ export const lausanneScene: Scene = {
     },
     {
       x: 12,
-      y: 13,
+      y: 15,
       label: 'La nostra Migros',
       lines: [
         'Sconti sul cioccolato quasi ogni giorno.',
@@ -197,7 +220,7 @@ export const lausanneScene: Scene = {
     },
     {
       x: 18,
-      y: 14,
+      y: 16,
       label: 'Museo Olimpico',
       lines: [
         'Fiamme, medaglie, record del mondo.',
@@ -207,7 +230,7 @@ export const lausanneScene: Scene = {
     },
     {
       x: 13,
-      y: 21,
+      y: 23,
       kind: 'none',
       label: 'Il lago di Ouchy',
       lines: [
@@ -216,13 +239,23 @@ export const lausanneScene: Scene = {
       ],
       memoryId: 'lau-ouchy',
     },
+    // il cartello di legno alla base della torre
+    {
+      x: 25,
+      y: 5,
+      label: 'Torre di Sauvabelin',
+      lines: [
+        '302 gradini di legno fino al cielo.',
+        'Su, su, su: il panorama ripaga tutto. Anche il fiatone.',
+      ],
+    },
   ],
 
   npcs: [
     {
       character: 'npcWoman',
       x: 11,
-      y: 17,
+      y: 19,
       dir: 'down',
       wander: true,
       label: 'Signora al lago',
@@ -234,7 +267,7 @@ export const lausanneScene: Scene = {
     {
       character: 'npcMan',
       x: 10,
-      y: 14,
+      y: 16,
       dir: 'down',
       label: 'Cliente della Migros',
       lines: [
@@ -245,7 +278,7 @@ export const lausanneScene: Scene = {
     {
       character: 'npcKid',
       x: 16,
-      y: 12,
+      y: 14,
       dir: 'left',
       wander: true,
       label: 'Piccolo campione',
@@ -254,12 +287,29 @@ export const lausanneScene: Scene = {
         'Per ora mi alleno a correre fino al lago.',
       ],
     },
+    // Gioele, lo scienziato pazzo, vaga per la città
+    {
+      character: 'npcMan',
+      custom: gioeleFrames,
+      x: 5,
+      y: 13,
+      dir: 'down',
+      wander: true,
+      label: 'Gioele',
+      lines: [
+        'Il paper! Devo risottomettere il paper! I reviewer non hanno capito NIENTE.',
+        'Secondo i miei calcoli, la scienza mi deve già tre lauree.',
+        'Scusa, pensavo ad alta voce. …O forse no?',
+      ],
+    },
   ],
 
   exits: [
     // la stradina che scende oltre il lungolago, verso il mondo
-    { x: 0, y: 21, w: 4, h: 1, to: 'overworld' },
+    { x: 0, y: 23, w: 4, h: 1, to: 'overworld' },
+    // la porta della torre: si sale! (spawn: quello della scena)
+    { x: 26, y: 5, w: 1, h: 1, to: 'sauvabelin' },
   ],
 
-  spawn: { x: 2, y: 20, dir: 'up' },
+  spawn: { x: 2, y: 22, dir: 'up' },
 }

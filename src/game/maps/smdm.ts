@@ -11,7 +11,14 @@
  *                  a asfalto · P sagrato/piazza · c ciottolato · h siepe
  */
 import type { Scene } from './types'
-import { smdmCasaRosa, smdmChiesa, smdmGabbiano, smdmIbba } from '../art/buildings/smdm'
+import {
+  smdmCasaRosa,
+  smdmChiesa,
+  smdmGabbiano,
+  smdmIbba,
+  smdmNoemi,
+  smdmRamona,
+} from '../art/buildings/smdm'
 
 export const smdmScene: Scene = {
   id: 'smdm',
@@ -192,6 +199,32 @@ export const smdmScene: Scene = {
       dir: 'left',
       label: 'Il barista delle Officine',
       lines: ['Il solito tavolino? Ve lo tengo sempre da parte.', 'Due cornetti, lo so già.'],
+    },
+    {
+      character: 'npcWoman',
+      custom: smdmRamona,
+      x: 3,
+      y: 13,
+      dir: 'down',
+      label: 'Ramona',
+      lines: [
+        'Benvenuti al Gabbiano! Scarpe pulite, mi raccomando.',
+        'NOEMI! Chi ha messo i tappetini al contrario?!',
+        'Quella ragazza… un disastro al giorno. Però le voglio bene.',
+      ],
+    },
+    {
+      character: 'npcWoman',
+      custom: smdmNoemi,
+      x: 7,
+      y: 14,
+      dir: 'down',
+      label: 'Noemi',
+      lines: [
+        'Ci siamo divertiti un sacco, la Crociera è bellipfsssima,',
+        'ah comunque non ci pfsono per 20 giorni che vado alle terme',
+        'ma ricordatevi che sono laureata pfzzzs pfzzss',
+      ],
     },
   ],
   exits: [{ x: 15, y: 19, w: 4, h: 1, to: 'overworld' }],

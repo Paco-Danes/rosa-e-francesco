@@ -5,6 +5,7 @@
  * inclinati verso l'osservatore, contorni scuri morbidi (K), luce dall'alto.
  */
 import { sprite } from '../format'
+import type { PixelSprite } from '../format'
 
 /** Casa di Rosa — 64×80 (4×5 tile). Due piani color crema, tetto rosso,
  * persiane verdi, fioriere, pensilina sulla porta e rose rampicanti. */
@@ -260,6 +261,122 @@ export const smdmGabbiano = sprite([
   '.KnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnK.',
   '.KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK.',
 ])
+
+/** Ramona — istruttrice del Gabbiano. 16×24, 2 frame idle frontali:
+ *  capelli scuri raccolti a chignon, completo sportivo azzurro,
+ *  asciugamano al collo e fischietto sul petto. */
+export const smdmRamona: PixelSprite[] = [
+  sprite([
+    '.....KKKKK......',
+    '....KHHHHHK.....',
+    '....KHHHHHK.....',
+    '...KKHHHHHKK....',
+    '..KHHHHHHHHHK...',
+    '..KHHHHHHHHHK...',
+    '..KHfffffffHK...',
+    '..KHfKfffKfHK...',
+    '...KfffffffK....',
+    '...KffKKKffK....',
+    '..KKwwwwwwwKK...',
+    '.KfKwBBBBBwKfK..',
+    '.KfKBBBBBBBKfK..',
+    '.KfKBBKYKBBKfK..',
+    '..KKBBBBBBBKK...',
+    '...KBdBBBdBK....',
+    '...KBBBBBBBK....',
+    '...KXXXXXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXK.KXXK....',
+    '..KwwK...KwwK...',
+    '..KKKK...KKKK...',
+  ]),
+  sprite([
+    '......KKKKK.....',
+    '.....KHHHHHK....',
+    '.....KHHHHHK....',
+    '....KKHHHHHKK...',
+    '...KHHHHHHHHHK..',
+    '...KHHHHHHHHHK..',
+    '...KHfffffffHK..',
+    '...KHfKfffKfHK..',
+    '....KfffffffK...',
+    '....KfffKfffK...',
+    '..KKwwwwwwwKK...',
+    '.KfKwBBBBBwKfK..',
+    '.KfKBBBBBBBKfK..',
+    '.KfKBBKYKBBKfK..',
+    '..KKBBBBBBBKK...',
+    '...KBdBBBdBK....',
+    '...KBBBBBBBK....',
+    '...KXXXXXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXK.KXXK....',
+    '..KwwK...KwwK...',
+    '..KKKK...KKKK...',
+  ]),
+]
+
+/** Noemi — la ragazza svampita del Gabbiano. 16×24, 2 frame idle frontali:
+ *  capelli a ciocche miste castano-biondo, occhioni sgranati e
+ *  sorriso storto (che nel secondo frame cambia lato). */
+export const smdmNoemi: PixelSprite[] = [
+  sprite([
+    '....KKKKKKK.....',
+    '...KhhYhhYhK....',
+    '..KhYhhYhhYhK...',
+    '..KYhhYhhYhhK...',
+    '..KhYfffffYhK...',
+    '..KhfKKfKKfYK...',
+    '..KYfKKfKKfhK...',
+    '...KfffffffK....',
+    '...KffKKfffK....',
+    '..KhYfffffYhK...',
+    '..KKpppppppKK...',
+    '.KfKpppPpppKfK..',
+    '.KfKppPpPppKfK..',
+    '.KfKpppppppKfK..',
+    '..KKpPpppPpKK...',
+    '...KpppppppK....',
+    '...KpPpppPpK....',
+    '...KXXXXXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXK.KXXK....',
+    '..KwwK...KwwK...',
+    '..KKKK...KKKK...',
+  ]),
+  sprite([
+    '.....KKKKKKK....',
+    '....KhhYhhYhK...',
+    '...KhYhhYhhYhK..',
+    '...KYhhYhhYhhK..',
+    '...KhYfffffYhK..',
+    '...KhfKKfKKfYK..',
+    '...KYfKKfKKfhK..',
+    '....KfffffffK...',
+    '....KfffKKffK...',
+    '..KhYfffffYhK...',
+    '..KKpppppppKK...',
+    '.KfKpppPpppKfK..',
+    '.KfKppPpPppKfK..',
+    '.KfKpppppppKfK..',
+    '..KKpPpppPpKK...',
+    '...KpppppppK....',
+    '...KpPpppPpK....',
+    '...KXXXXXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXXKXXXK....',
+    '...KXXK.KXXK....',
+    '..KwwK...KwwK...',
+    '..KKKK...KKKK...',
+  ]),
+]
 
 /** Caffè "Officine Ibba" — 80×64 (5×4 tile). Mattoni industrial-chic,
  * tenda a righe, vetrata ad arco e l'ingranaggio delle vecchie officine. */

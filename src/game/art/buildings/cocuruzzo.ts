@@ -7,6 +7,7 @@
  * rosone acceso, campana d'oro, festoni di lucine sulla facciata.
  */
 import { sprite } from '../format'
+import type { PixelSprite } from '../format'
 
 /** n puntini trasparenti */
 const D = (n: number) => '.'.repeat(n)
@@ -393,3 +394,125 @@ const naveRows = navata()
 const towerRows = campanile()
 
 export const chiesetta = sprite(naveRows.map((r, i) => r + towerRows[i]))
+
+// ─────────────────────────────────────────────────────────────────────────
+// ANNARITA — la signora del bar, un po' brilla. 16×24, 2 frame frontali:
+// caschetto biondo, guanciotte rosse, vestito rosa scuro con grembiule,
+// bottiglia verde alzata; tra un frame e l'altro ondeggia di 1px.
+// ─────────────────────────────────────────────────────────────────────────
+
+export const annarita: PixelSprite[] = [
+  sprite([
+    '................',
+    '............KK..',
+    '....KKKK...KyGK.',
+    '...KYYYYKK.KGVK.',
+    '..KYyYYYYYKKGVK.',
+    '..KYYYYYYYKKGVK.',
+    '..KYffffYK..KK..',
+    '..KYfzfzYK.KffK.',
+    '..KYPffPYK.KffK.',
+    '...KKffKK..KfK..',
+    '..KQQQQQQKKfK...',
+    '.KQQKWWKQQKK....',
+    '.KQKWWWWKQK.....',
+    '.KfKWWWWKQK.....',
+    '..KKWWWWKQK.....',
+    '..KQWWWWQKK.....',
+    '.KQQQQQQQQK.....',
+    '.KQQQQQQQQK.....',
+    '.KQQQQQQQQK.....',
+    '.KKKKKKKKKK.....',
+    '...KffKffK......',
+    '...KffKffK......',
+    '..KQQK.KQQK.....',
+    '..KKKK.KKKK.....',
+  ]),
+  sprite([
+    '................',
+    '.............KK.',
+    '.....KKKK...KyGK',
+    '....KYYYYKK.KGVK',
+    '...KYyYYYYYKKGVK',
+    '...KYYYYYYYKKGVK',
+    '...KYffffYK..KK.',
+    '...KYfzfzYK.KffK',
+    '...KYPffPYK.KffK',
+    '....KKffKK..KfK.',
+    '..KQQQQQQK.KfK..',
+    '.KQQKWWKQQKK....',
+    '.KQKWWWWKQK.....',
+    '.KfKWWWWKQK.....',
+    '..KKWWWWKQK.....',
+    '..KQWWWWQKK.....',
+    '.KQQQQQQQQK.....',
+    '.KQQQQQQQQK.....',
+    '.KQQQQQQQQK.....',
+    '.KKKKKKKKKK.....',
+    '...KffKffK......',
+    '...KffKffK......',
+    '..KQQK.KQQK.....',
+    '..KKKK.KKKK.....',
+  ]),
+]
+
+// ─────────────────────────────────────────────────────────────────────────
+// VINCENZO — capelli corti, maglia azzurra con riga bianca, pantaloncini e
+// calzettoni bianchi, braccia conserte, naso all'insù verso i fuochi.
+// 16×24, 2 frame frontali (nel secondo alza appena il mento).
+// ─────────────────────────────────────────────────────────────────────────
+
+export const vincenzo: PixelSprite[] = [
+  sprite([
+    '................',
+    '................',
+    '....KKKK........',
+    '...KHHHHKK......',
+    '..KHHHHHHHK.....',
+    '..KHHHHHHK......',
+    '..KHffffHK......',
+    '..KfzffzfK......',
+    '..KffffffK......',
+    '...KffffK.......',
+    '..KKBBBBKK......',
+    '.KBBBwwBBBK.....',
+    '.KBBBwwBBBK.....',
+    '.KKKffffKKK.....',
+    '.KBKffffKBK.....',
+    '..KBBwwBBK......',
+    '..KwwwwwwK......',
+    '...KwwKwwK......',
+    '...KffKffK......',
+    '...KffKffK......',
+    '...KwwKwwK......',
+    '...KwwKwwK......',
+    '..KzzK.KzzK.....',
+    '..KKKK.KKKK.....',
+  ]),
+  sprite([
+    '................',
+    '....KKKK........',
+    '...KHHHHKK......',
+    '..KHHHHHHHK.....',
+    '..KHHHHHHK......',
+    '..KHffffHK......',
+    '..KfzffzfK......',
+    '..KffffffK......',
+    '...KffffK.......',
+    '...KffffK.......',
+    '..KKBBBBKK......',
+    '.KBBBwwBBBK.....',
+    '.KBBBwwBBBK.....',
+    '.KKKffffKKK.....',
+    '.KBKffffKBK.....',
+    '..KBBwwBBK......',
+    '..KwwwwwwK......',
+    '...KwwKwwK......',
+    '...KffKffK......',
+    '...KffKffK......',
+    '...KwwKwwK......',
+    '...KwwKwwK......',
+    '..KzzK.KzzK.....',
+    '..KKKK.KKKK.....',
+  ]),
+]

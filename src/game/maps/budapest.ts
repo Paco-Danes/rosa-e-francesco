@@ -2,16 +2,22 @@
  * BUDAPEST — «La fuga romantica», in due scene.
  *
  *  - danubioScene: la traversata notturna in barchetta. Il player È la
- *    barca (playerSprite 'boat'); si entra dal bordo ovest e si rema fino
- *    al molo di legno sul bordo est, che porta alla città.
+ *    barca (playerSprite 'boat'); dall'overworld si entra dal bordo ovest
+ *    e si rema fino al molo di legno sul bordo est, che porta alla città.
+ *    Il viaggio è simmetrico: dal molo di Budapest si risale in barca e,
+ *    remando verso ovest, il bordo ovest riporta al molo dell'overworld.
  *  - budapestScene: la città d'oro di notte — il Parlamento illuminato,
- *    il Ponte delle Catene coi leoni, il Bastione dei Pescatori.
+ *    il Bastione dei Pescatori e il Ponte delle Catene sospeso su un vero
+ *    canale d'acqua che sfocia nel Danubio: l'impalcato tra le due torri
+ *    si attraversa a piedi, con l'acqua che luccica sotto le arcate.
  */
 import type { Scene } from './types'
 import {
   parlamento,
   bastione,
-  ponteCatene,
+  ponteTorreCitta,
+  ponteCatenaCitta,
+  ponteArcataCitta,
   nottePalazzo,
   notteCase,
   notteChiesa,
@@ -21,9 +27,10 @@ import {
 } from '../art/buildings/budapest'
 
 /* ────────────────────────────────────────────────────────────────────────
- * IL DANUBIO DI NOTTE — 30×14, traversata pura: niente NPC, niente exit
- * verso l'overworld. Rive solide con le silhouette della città addormentata,
- * il Ponte delle Catene illuminato in alto, boe che dondolano.
+ * IL DANUBIO DI NOTTE — 30×14, la traversata: niente NPC, solo il fiume.
+ * Rive solide con le silhouette della città addormentata, il Ponte delle
+ * Catene illuminato in alto, boe che dondolano. Si naviga in entrambi i
+ * sensi: verso est si sbarca a Budapest, verso ovest si torna al mondo.
  * ──────────────────────────────────────────────────────────────────────── */
 export const danubioScene: Scene = {
   id: 'danubio',
@@ -111,6 +118,8 @@ export const danubioScene: Scene = {
   exits: [
     // il molo di legno sul bordo est → si sbarca a Budapest
     { x: 29, y: 7, w: 1, h: 3, to: 'budapest', spawn: { x: 13, y: 20, dir: 'up' } },
+    // il bordo ovest → si torna al molo dell'overworld (posizione ricordata dal motore)
+    { x: 0, y: 6, w: 1, h: 5, to: 'overworld' },
   ],
   spawn: { x: 1, y: 8, dir: 'right' },
 }
@@ -118,8 +127,10 @@ export const danubioScene: Scene = {
 /* ────────────────────────────────────────────────────────────────────────
  * BUDAPEST — 28×22, la città d'oro di notte. In alto a sinistra la terrazza
  * del Bastione (scale al centro della siepe), a destra il Parlamento con la
- * piazza; in basso il Ponte delle Catene coi leoni, poi la banchina sul
- * Danubio con il molo di legno che riporta al mondo.
+ * piazza; in basso a sinistra il canale che sfocia nel Danubio, attraversato
+ * dal Ponte delle Catene: due torri di pietra sulle sponde e l'impalcato
+ * calpestabile in mezzo, con l'acqua che passa sotto le arcate. A sud la
+ * banchina e il molo di legno da cui si riparte in barca.
  * ──────────────────────────────────────────────────────────────────────── */
 export const budapestScene: Scene = {
   id: 'budapest',
@@ -138,7 +149,7 @@ export const budapestScene: Scene = {
     f: { base: 'flowers' },
     T: { base: 'tallGrass' },
     h: { base: 'hedge', solid: true }, // parapetto della terrazza
-    E: { base: 'deepWater', solid: true }, // il Danubio
+    E: { base: 'deepWater', solid: true }, // il Danubio e il canale
   },
   ground: [
     'ppppppppppppppgGggfggGfggGgT',
@@ -153,21 +164,27 @@ export const budapestScene: Scene = {
     'cccccccccccccccppppppppppppG',
     'ccccccccppppppccccccccccfgGf',
     'ccccccccppppppccccccccccgfgg',
-    'ccccccccppppppccccccccccTTgG',
-    'ccccccccccccccccccccccffffTG',
-    'ccccccccccccccccccccccffffGT',
-    'ccccccccccccccccccccccccccgg',
-    'cccccccccccccccccccccccccccc',
-    'cccccccccccccccccccccccccccc',
-    'ssssssssssssssssssssssssssss',
-    'ssssssssssssswwsssssssssssss',
+    'ccEEEEccppppppccccccccccTTgG',
+    'ccEEEEccccccccccccccccffffTG',
+    'ccEEEEccccccccccccccccffffGT',
+    'ccppppccccccccccccccccccccgg',
+    'ccEEEEcccccccccccccccccccccc',
+    'ccEEEEcccccccccccccccccccccc',
+    'ssEEEEssssssssssssssssssssss',
+    'ssEEEEssssssswwsssssssssssss',
     'EEEEEEEEEEEEEwwEEEEEEEEEEEEE',
     'EEEEEEEEEEEEEwwEEEEEEEEEEEEE',
   ],
   buildings: [
     { sprite: bastione, x: 2, y: 0, solid: { x: 0, y: 2, w: 7, h: 3 } },
     { sprite: parlamento, x: 17, y: 2, solid: { x: 0, y: 3, w: 7, h: 3 } },
-    { sprite: ponteCatene, x: 0, y: 11, solid: { x: 0, y: 1, w: 6, h: 3 } },
+    // il Ponte delle Catene: una torre per sponda, l'impalcato è di tile
+    { sprite: ponteTorreCitta, x: 0, y: 11, solid: { x: 0, y: 2, w: 2, h: 2 } },
+    { sprite: ponteTorreCitta, x: 6, y: 11, solid: { x: 0, y: 2, w: 2, h: 2 } },
+    // festone di catene sospeso sull'acqua a monte (non solido, dietro al player)
+    { sprite: ponteCatenaCitta, x: 2, y: 12, solid: { x: 0, y: 0, w: 0, h: 0 } },
+    // fianco a valle dell'impalcato: sotto le arcate luccica il canale
+    { sprite: ponteArcataCitta, x: 2, y: 16, solid: { x: 0, y: 0, w: 0, h: 0 } },
   ],
   props: [
     // la terrazza del Bastione
@@ -190,15 +207,20 @@ export const budapestScene: Scene = {
     { prop: 'lamp', x: 7, y: 10 },
     { prop: 'lamp', x: 23, y: 10 },
     { prop: 'fountain', x: 10, y: 11 },
-    { prop: 'lamp', x: 7, y: 13 },
+    { prop: 'lamp', x: 8, y: 13 },
     { prop: 'lamp', x: 18, y: 13 },
     { prop: 'roseBush', x: 22, y: 13 },
     { prop: 'flowerPatch', x: 24, y: 13 },
     { prop: 'flowerPatch', x: 23, y: 14 },
     { prop: 'pot', x: 25, y: 14 },
-    // i leoni del Ponte delle Catene
-    { prop: 'statue', x: 0, y: 15 },
-    { prop: 'statue', x: 5, y: 15 },
+    // il canale e il Ponte delle Catene
+    { prop: 'lamp', x: 3, y: 11 }, // sul bordo del bacino a monte
+    { prop: 'lamp', x: 6, y: 17 }, // sulla sponda est del canale
+    { prop: 'buoy', x: 3, y: 17 },
+    { prop: 'buoy', x: 4, y: 19 },
+    // i leoni di guardia ai piedi del ponte
+    { prop: 'statue', x: 0, y: 16 },
+    { prop: 'statue', x: 7, y: 16 },
     // il chiosco dei langos
     { prop: 'table', x: 23, y: 16 },
     { prop: 'barrel', x: 25, y: 16 },
@@ -210,7 +232,7 @@ export const budapestScene: Scene = {
     { prop: 'pot', x: 0, y: 17 },
     { prop: 'pot', x: 27, y: 17 },
     // la banchina sul Danubio
-    { prop: 'bench', x: 4, y: 18 },
+    { prop: 'bench', x: 7, y: 18 },
     { prop: 'bench', x: 21, y: 18 },
     { prop: 'lamp', x: 0, y: 19 },
     { prop: 'lamp', x: 9, y: 19 },
@@ -229,8 +251,8 @@ export const budapestScene: Scene = {
       memoryId: 'bud-parlamento',
     },
     {
-      x: 2,
-      y: 15,
+      x: 8,
+      y: 16,
       label: 'Il Ponte delle Catene',
       lines: [
         'I leoni di pietra fanno la guardia da due secoli.',
@@ -277,8 +299,8 @@ export const budapestScene: Scene = {
     },
   ],
   exits: [
-    // dal molo di legno si torna al mondo
-    { x: 13, y: 21, w: 2, h: 1, to: 'overworld' },
+    // dal molo di legno si risale in barca: si torna sul Danubio, prua a ovest
+    { x: 13, y: 21, w: 2, h: 1, to: 'danubio', spawn: { x: 28, y: 8, dir: 'left' } },
   ],
   spawn: { x: 13, y: 20, dir: 'up' },
 }

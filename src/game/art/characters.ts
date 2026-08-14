@@ -1,7 +1,7 @@
 /**
  * PERSONAGGI 16×24 — stile Pokémon HGSS/BW: testa grande, silhouette
  * leggibili a scala 3×. Ogni direzione: [fermo, passo sx, passo dx].
- * La barchetta è 24×24: i frames sono l'ondeggiamento dolce.
+ * Il traghetto è 24×32 (32×24 in orizzontale): i frames sono il beccheggio.
  */
 import { sprite } from './format'
 import type { PixelSprite } from './format'
@@ -271,34 +271,43 @@ const francesco: CharacterSet = {
 }
 
 // ================================================================ BOAT
-// Barchetta di legno vista dall'alto, Rosa a prua e Francesco ai remi.
-// down = prua in basso; i frames sono l'ondeggiamento dolce.
+// Piccolo traghetto bianco visto dall'alto: cabina coi finestrini, fumaiolo
+// oro, Rosa a prua e Francesco dietro di lei. down = prua in basso;
+// i frames sono il beccheggio dolce (±1px, con la scia i sull'acqua).
 
 const boatDown: Rows = [
-  '........................',
-  '........................',
+  '.........i....i.........',
+  '.......ii......ii.......',
   '......KKKKKKKKKKKK......',
-  '.....KKuuuuuuuuuuKK.....',
-  '.....KUuuuuuuuuuuUK.....',
-  '.....KUttttttttttUK..i..',
-  '..i..KUttBBBBBBttUK.....',
-  '.....KUtBBHHHHBBtUK.....',
-  'KuuuuKUtBBHhhHBBtUKuuuuK',
-  '.ii..KUttBBHHBBttUK..ii.',
-  '.....KUtuUUUUUUutUK.....',
-  '.i...KUttttttttttUK.....',
-  '.....KUttPPPPPPttUK.....',
-  '.....KUtPPHHHHPPtUK.....',
-  '.....KUtPPHhpHPPtUK..i..',
-  '..i..KUttPPHHPPttUK.....',
-  '.....KUttttttttttUK.....',
-  '.....KUuuuuuuuuuuUK.....',
-  '......KUuuuuuuuuUK......',
-  '.......KUuuuuuuUK....i..',
-  '..i.....KUuuuuUK........',
-  '.........KUuuUK.........',
-  '..........KUUK..........',
-  '...........KK..........i',
+  '.....KWWwwwwwwwwWWK.....',
+  '....KWwwwwwwwwwwwwWK....',
+  '....KWwYYYYYYYYYYwWK.i..',
+  '.i..KWwwwwwwwwwwwwWK....',
+  '....KWwwKKKKKKKKwwWK....',
+  '....KWwwKzzyzzzKwwWK....',
+  '....KWwwKwwwwwwKwwWK..i.',
+  '....KWwwKwWYYWwKwwWK....',
+  '..i.KWwwKwWYYWwKwwWK....',
+  '....KWwwKwwwwwwKwwWK....',
+  '....KWwwKzzzzyzKwwWK....',
+  '....KWwwKKKKKKKKwwWK....',
+  '....KWwwwwwwwwwwwwWK.i..',
+  '....KWwwwBBBBBBwwwWK....',
+  '....KWwwBBHHHHBBwwWK....',
+  '....KWwwBBHhhHBBwwWK....',
+  '....KWwwwBBHHBBwwwWK....',
+  '....KWwwwwwwwwwwwwWK....',
+  '....KWwwwPPPPPPwwwWK..i.',
+  '....KWwwPPHHHHPPwwWK....',
+  '....KWwwPPHhpHPPwwWK....',
+  '.i..KWwwwPPHHPPwwwWK....',
+  '....KXwwwwwwwwwwwwXK....',
+  '.....KWwwwwwwwwwwWK.i...',
+  '......KXwwwwwwwwXK......',
+  '.......KXwwwwwwXK..i....',
+  '..i.....KXwwwwXK........',
+  '.........KXwwXK.........',
+  '.........iKXXKi.........',
 ]
 
 const boatFrames = (base: Rows, horizontal: boolean): PixelSprite[] =>

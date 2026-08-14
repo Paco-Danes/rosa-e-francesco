@@ -275,76 +275,117 @@ function toSprite(g: Grid): PixelSprite {
 }
 
 /* ────────────────────────────────────────────────────────────────────────
- * IL PONTE DELLE CATENE (monumento cittadino) — 96×64.
- * Due torrioni di pietra ad arco, catene che scendono con le lampadine
- * accese, balaustra col parapetto. I leoni sono props `statue` ai piedi.
+ * IL PONTE DELLE CATENE (scena città) — in tre pezzi, perché stavolta il
+ * ponte attraversa VERA acqua: le due torri di pietra sono edifici solidi
+ * sulle sponde del canale, l'impalcato in mezzo è fatto di tile calpestabili,
+ * il festone di catene e le arcate sono sprite non solidi sopra l'acqua.
  * ──────────────────────────────────────────────────────────────────────── */
-function buildPonteCatene(): PixelSprite {
-  const g = grid(96, 64)
-  const H = 48 // metà sinistra
 
-  // torrione: x20-37, y2-49
-  paint(g, 22, 2, 'y')
-  paint(g, 35, 2, 'y')
-  paint(g, 22, 3, 'k')
-  paint(g, 35, 3, 'k')
-  paint(g, 20, 4, 'K' + 'c'.repeat(16) + 'K')
-  paint(g, 20, 5, 'Kc' + 'C'.repeat(14) + 'K')
-  paint(g, 21, 6, 'K' + 'C'.repeat(14) + 'K')
-  for (let y = 7; y <= 19; y++) paint(g, 21, y, 'KcC' + 'C'.repeat(10) + 'nK')
-  paint(g, 21, 20, 'KcCCKKKKKKKKCCnK'.slice(0, 16))
-  paint(g, 21, 21, 'KcCKKzzzzKKCCnK')
-  for (let y = 22; y <= 49; y++) paint(g, 21, y, 'KcCKzzzzzzKCCnK')
-  // lanterna appesa nell'arco
-  pset(g, 28, 23, 'k')
-  pset(g, 28, 24, 'k')
-  paint(g, 27, 25, 'yyy')
-  // catena esterna: da (19,6) a (0,36), con lampadine
-  for (let y = 6; y <= 36; y++) {
-    const x = Math.round(19 - (19 * (y - 6)) / 30)
-    pset(g, x, y, y % 3 === 0 ? 'y' : 'K')
-    pset(g, x + 1, y, 'k')
-  }
-  // catena interna: da (38,6) al centro (47,17)
-  for (let y = 6; y <= 17; y++) {
-    const x = Math.min(47, 38 + Math.round((9 * (y - 6)) / 11))
-    pset(g, x, y, y % 3 === 0 ? 'y' : 'K')
-    if (x + 1 < H) pset(g, x + 1, y, 'k')
-  }
-  // pendini verticali fino al parapetto
-  for (const sx of [5, 12, 42, 45]) {
-    let top = 8
-    for (let y = 6; y <= 40; y++) {
-      const r = g[y]
-      if (r && r[sx] !== '.') top = y + 1
-    }
-    for (let y = top; y < 50; y++) if (g[y] && g[y]![sx] === '.') pset(g, sx, y, 'k')
-  }
-  // lampioni della balaustra
-  for (const lx of [8, 15]) {
-    pset(g, lx, 46, 'y')
-    pset(g, lx, 47, 'k')
-    pset(g, lx, 48, 'k')
-    pset(g, lx, 49, 'k')
-  }
-  // parapetto e basamento (y50-63)
-  paint(g, 0, 50, 'c'.repeat(H))
-  paint(g, 0, 51, 'C'.repeat(H))
-  for (let y = 52; y <= 53; y++) {
-    paint(g, 0, y, 'C'.repeat(H))
-    for (let x = 1; x < H; x += 6) pset(g, x, y, 'K')
-  }
-  paint(g, 0, 54, 'n'.repeat(H))
-  paint(g, 0, 55, 'C'.repeat(H))
-  for (let y = 56; y <= 59; y++) paint(g, 0, y, 'n'.repeat(H))
-  for (let y = 60; y <= 62; y++) paint(g, 0, y, 'N'.repeat(H))
-  paint(g, 0, 63, 'K'.repeat(H))
+/** torrione di pietra ad arco — 32×64, uno per sponda */
+function buildPonteTorreCitta(): PixelSprite {
+  const g = grid(32, 64)
+  // fanali d'oro sul coronamento
+  pset(g, 6, 0, 'y')
+  pset(g, 25, 0, 'y')
+  pset(g, 6, 1, 'k')
+  pset(g, 25, 1, 'k')
+  // cornicione a gradoni
+  paint(g, 3, 2, 'K'.repeat(26))
+  paint(g, 3, 3, 'K' + 'c'.repeat(23) + 'nK')
+  paint(g, 2, 4, 'K'.repeat(28))
+  paint(g, 2, 5, 'K' + 'c'.repeat(25) + 'nK')
+  paint(g, 2, 6, 'Kc' + 'C'.repeat(24) + 'nK')
+  // corpo in pietra, luce da sinistra-alto
+  for (let y = 7; y <= 53; y++) paint(g, 2, y, 'Kc' + 'C'.repeat(24) + 'nK')
+  // basamento scuro verso terra
+  for (let y = 54; y <= 58; y++) paint(g, 2, y, 'K' + 'n'.repeat(26) + 'K')
+  for (let y = 59; y <= 62; y++) paint(g, 2, y, 'K' + 'N'.repeat(26) + 'K')
+  paint(g, 2, 63, 'K'.repeat(28))
+  // attacchi dorati delle catene sui fianchi (all'altezza del festone)
+  pset(g, 2, 19, 'y')
+  pset(g, 2, 20, 'y')
+  pset(g, 29, 19, 'y')
+  pset(g, 29, 20, 'y')
+  // arco passante: curva, ombra profonda e lanterna accesa
+  paint(g, 13, 18, 'KKKKKK')
+  paint(g, 11, 19, 'KK' + 'z'.repeat(6) + 'KK')
+  for (let y = 20; y <= 62; y++) paint(g, 11, y, 'K' + 'z'.repeat(8) + 'K')
+  pset(g, 15, 22, 'k')
+  pset(g, 15, 23, 'k')
+  paint(g, 14, 24, 'yyy')
+  return toSprite(g)
+}
 
+export const ponteTorreCitta = buildPonteTorreCitta()
+
+/** festone di catene sospeso tra le torri — 64×48, sopra l'acqua a nord */
+function buildPonteCatenaCitta(): PixelSprite {
+  const g = grid(64, 48)
+  // catena: alta agli attacchi, morbida al centro, perle di luce ogni 4 px
+  for (let x = 0; x < 32; x++) {
+    const t = (31 - x) / 31
+    const y = Math.round(4 + 18 * (1 - t * t))
+    pset(g, x, y, x % 4 === 0 ? 'y' : 'K')
+    pset(g, x, y + 1, 'k')
+  }
+  // pendini verso l'impalcato
+  for (const sx of [6, 14, 22, 30]) {
+    const t = (31 - sx) / 31
+    const top = Math.round(4 + 18 * (1 - t * t)) + 2
+    for (let y = top; y < 44; y++) pset(g, sx, y, 'k')
+  }
+  // perle di luce riflesse sull'acqua del canale
+  for (const rx of [4, 12, 20, 28]) {
+    pset(g, rx, 44, 'y')
+    pset(g, rx + 2, 46, 'y')
+  }
   mirrorGrid(g)
   return toSprite(g)
 }
 
-export const ponteCatene = buildPonteCatene()
+export const ponteCatenaCitta = buildPonteCatenaCitta()
+
+/** fianco sud dell'impalcato — 64×16: due arcate, dentro si vede l'acqua */
+function buildPonteArcataCitta(): PixelSprite {
+  const g = grid(64, 16)
+  const carve = (x0: number, x1: number, y: number) => {
+    for (let x = x0; x <= x1; x++) pset(g, x, y, '.')
+  }
+  // parapetto e fascia di pietra
+  paint(g, 0, 0, 'K'.repeat(64))
+  paint(g, 0, 1, 'c'.repeat(64))
+  paint(g, 0, 2, 'C'.repeat(64))
+  for (let y = 3; y <= 11; y++) paint(g, 0, y, 'C'.repeat(64))
+  for (let y = 12; y <= 14; y++) paint(g, 0, y, 'n'.repeat(64))
+  paint(g, 0, 15, 'N'.repeat(64))
+  // arcata larga 24: curva in alto, apertura trasparente sull'acqua
+  const arco = (a: number) => {
+    const b = a + 23
+    paint(g, a + 7, 4, 'K'.repeat(10))
+    paint(g, a + 3, 5, 'KKKK')
+    paint(g, b - 6, 5, 'KKKK')
+    carve(a + 7, b - 7, 5)
+    paint(g, a + 1, 6, 'KK')
+    paint(g, b - 2, 6, 'KK')
+    carve(a + 3, b - 3, 6)
+    for (let y = 7; y <= 15; y++) {
+      pset(g, a, y, 'K')
+      pset(g, b, y, 'K')
+      carve(a + 1, b - 1, y)
+    }
+    // luccichii dorati sull'acqua sotto l'arcata
+    pset(g, a + 6, 12, 'y')
+    pset(g, b - 8, 14, 'y')
+    pset(g, a + 11, 15, 'y')
+  }
+  arco(5)
+  arco(35)
+  // le luci della catena di valle, in fila sul parapetto
+  for (let x = 4; x < 64; x += 9) pset(g, x, 0, 'y')
+  return toSprite(g)
+}
+
+export const ponteArcataCitta = buildPonteArcataCitta()
 
 /* ────────────────────────────────────────────────────────────────────────
  * DANUBIO DI NOTTE — silhouette delle rive e ponte «collana di perle».

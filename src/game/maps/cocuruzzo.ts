@@ -8,7 +8,14 @@
  * Mappa 30×22. Ingresso e uscita sul bordo inferiore.
  */
 import type { Scene } from './types'
-import { casaPietra1, casaPietra2, casaPietra3, chiesetta } from '../art/buildings/cocuruzzo'
+import {
+  annarita,
+  casaPietra1,
+  casaPietra2,
+  casaPietra3,
+  chiesetta,
+  vincenzo,
+} from '../art/buildings/cocuruzzo'
 
 export const cocuruzzoScene: Scene = {
   id: 'cocuruzzo',
@@ -75,6 +82,8 @@ export const cocuruzzoScene: Scene = {
     { prop: 'lamp', x: 26, y: 9 },
     { prop: 'barrel', x: 21, y: 9 },
     { prop: 'barrel', x: 25, y: 9 },
+    // il banchetto-bar di Annarita, dietro la tavolata
+    { prop: 'table', x: 23, y: 10 },
     { prop: 'table', x: 21, y: 11 },
     { prop: 'table', x: 23, y: 11 },
     { prop: 'table', x: 25, y: 11 },
@@ -215,6 +224,32 @@ export const cocuruzzoScene: Scene = {
       wander: true,
       label: 'Compare col bicchiere',
       lines: ['Alla salute dei fidanzati!', 'Stasera si balla in piazza fino all’alba!'],
+    },
+    {
+      character: 'npcNonna',
+      custom: annarita,
+      x: 24,
+      y: 10,
+      dir: 'down',
+      label: 'Annarita',
+      lines: [
+        'Un Gin Lemon, arriva!… Allora: gin… o vodka?',
+        'La vodka è il gin dei russi, giusto? Giusto. Hic.',
+        'Comunque il segreto è il limone. Credo.',
+      ],
+    },
+    {
+      character: 'npcMan',
+      custom: vincenzo,
+      x: 17,
+      y: 7,
+      dir: 'down',
+      label: 'Vincenzo',
+      lines: [
+        'Quarantacinque minuti di fuochi. QUARANTACINQUE.',
+        'Io dico: minimo un’ora e mezza. Come una partita.',
+        'L’anno prossimo la colletta la organizzo io.',
+      ],
     },
     {
       character: 'npcKid',
