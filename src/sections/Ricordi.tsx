@@ -1,38 +1,63 @@
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import type { PointerEvent as ReactPointerEvent } from 'react'
-import { MEMORIES } from '../content/memories'
-import type { MemoryId } from '../content/memories'
 import './sections.css'
 
 export interface SectionProps {
   onBack: () => void
 }
 
-/** Una selezione di polaroid, un po' da ogni città. */
-const SCELTE: { id: MemoryId; rot: number }[] = [
-  { id: 'lau-ouchy', rot: -4 },
-  { id: 'smdm-piazza', rot: 3 },
-  { id: 'coc-fuochi', rot: -2.5 },
-  { id: 'bud-parlamento', rot: 5 },
-  { id: 'tor-tramonto', rot: -5 },
-  { id: 'mil-duomo', rot: 2 },
-  { id: 'lau-cattedrale', rot: 4.5 },
-  { id: 'coc-piscina', rot: -3 },
-  { id: 'bud-ponte', rot: 1.5 },
-  { id: 'smdm-ibba', rot: -1.5 },
-]
+/**
+ * Le polaroid dei Ricordi vivono in src/assets/ricordi/ — una cartella TUTTA
+ * loro, separata dalle foto del minigioco (niente spoiler!).
+ *
+ * ✏️ PER FRANCESCO: per aggiungere una polaroid basta mettere un'immagine
+ * (.jpg/.png/.webp/.svg) in src/assets/ricordi/ e fare commit+push.
+ * Il nome del file diventa la didascalia: "una-sera-a-roma.jpg" → "una sera
+ * a roma". Un prefisso numerico ordina senza apparire: "01-il-primo-bacio.jpg".
+ */
+const FILES = import.meta.glob('../assets/ricordi/*.{jpg,jpeg,JPG,JPEG,png,PNG,webp,svg}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+}) as Record<string, string>
 
-const FOTO_BASE = import.meta.env.BASE_URL + 'photos/'
+interface Polaroid {
+  url: string
+  caption: string
+  rot: number
+}
+
+function captionFromPath(path: string): string {
+  const base = path.split('/').pop() ?? ''
+  return base
+    .replace(/\.[^.]+$/, '')
+    .replace(/^\d+[-_ ]*/, '')
+    .replace(/[-_]+/g, ' ')
+    .trim()
+}
 
 export default function Ricordi({ onBack }: SectionProps) {
-  const [focus, setFocus] = useState<MemoryId | null>(null)
+  const [focus, setFocus] = useState<number | null>(null)
   const [pos, setPos] = useState({ x: 0, y: 0 })
   const [trascina, setTrascina] = useState(false)
   const presa = useRef({ px: 0, py: 0, x0: 0, y0: 0 })
 
-  const apri = (id: MemoryId) => {
+  const polaroids = useMemo<Polaroid[]>(
+    () =>
+      Object.keys(FILES)
+        .sort()
+        .map((path, i) => ({
+          url: FILES[path],
+          caption: captionFromPath(path),
+          // rotazione "casuale" ma stabile per ogni posizione
+          rot: ((i * 47 + 13) % 11) - 5,
+        })),
+    []
+  )
+
+  const apri = (i: number) => {
     setPos({ x: 0, y: 0 })
-    setFocus(id)
+    setFocus(i)
   }
 
   const onPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -49,7 +74,7 @@ export default function Ricordi({ onBack }: SectionProps) {
 
   const onPointerUp = () => setTrascina(false)
 
-  const grande = focus ? MEMORIES[focus] : null
+  const grande = focus !== null ? polaroids[focus] : null
 
   return (
     <div className="sez">
@@ -62,37 +87,37 @@ export default function Ricordi({ onBack }: SectionProps) {
         <h1 className="sez__title">Ricordi</h1>
         <p className="sez__sub">polaroid sparse sul tavolo della nostra storia</p>
 
-        <div className="polaroids">
-          {SCELTE.map(({ id, rot }) => {
-            const m = MEMORIES[id]
-            return (
+        {polaroids.length === 0 ? (
+          <p className="sez__whisper">le prime polaroid stanno per arrivare… ♡</p>
+        ) : (
+          <div className="polaroids">
+            {polaroids.map((p, i) => (
               <button
-                key={id}
+                key={p.url}
                 className="polaroid"
-                style={{ '--rot': `${rot}deg` } as React.CSSProperties}
-                onClick={() => apri(id)}
-                aria-label={`Guarda da vicino: ${m.title}, ${m.city}`}
+                style={{ '--rot': `${p.rot}deg` } as React.CSSProperties}
+                onClick={() => apri(i)}
+                aria-label={`Guarda da vicino: ${p.caption}`}
               >
                 <img
                   className="polaroid__foto"
-                  src={FOTO_BASE + m.photos[0]}
-                  alt={`${m.title} — ${m.city}`}
+                  src={p.url}
+                  alt={p.caption}
                   loading="lazy"
                   draggable={false}
                 />
                 <span className="polaroid__dida">
-                  <strong>{m.title}</strong>
-                  <span>{m.city}</span>
+                  <strong>{p.caption}</strong>
                 </span>
               </button>
-            )
-          })}
-        </div>
+            ))}
+          </div>
+        )}
 
         <p className="sez__whisper">ogni foto è un posto dove torneremo, almeno col cuore ♡</p>
       </div>
 
-      {grande && focus && (
+      {grande && (
         <div
           className="polaroid-overlay"
           onClick={() => setFocus(null)}
@@ -103,7 +128,7 @@ export default function Ricordi({ onBack }: SectionProps) {
             className={`polaroid polaroid--grande${trascina ? ' trascina' : ''}`}
             style={
               {
-                '--rot': `${SCELTE.find((s) => s.id === focus)?.rot ?? 0}deg`,
+                '--rot': `${grande.rot}deg`,
                 '--dx': `${pos.x}px`,
                 '--dy': `${pos.y}px`,
               } as React.CSSProperties
@@ -114,17 +139,9 @@ export default function Ricordi({ onBack }: SectionProps) {
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerUp}
           >
-            <img
-              className="polaroid__foto"
-              src={FOTO_BASE + grande.photos[0]}
-              alt={`${grande.title} — ${grande.city}`}
-              draggable={false}
-            />
+            <img className="polaroid__foto" src={grande.url} alt={grande.caption} draggable={false} />
             <span className="polaroid__dida">
-              <strong>{grande.title}</strong>
-              <span>
-                {grande.city} · {grande.date}
-              </span>
+              <strong>{grande.caption}</strong>
             </span>
           </div>
           <p className="polaroid-overlay__hint">trascinala dove vuoi · tocca fuori per posarla</p>

@@ -16,7 +16,8 @@ L'ingresso è protetto da una domanda dolce. **Password provvisoria durante i la
 | Testi/date dei ricordi nel gioco | `src/content/memories.ts` |
 | Lettere di "pensieri dolci" (aggiungine quando vuoi!) | `src/content/letters.ts` |
 | Motivi del bottone "un motivo per cui ti amo" | `src/content/reasons.ts` |
-| Foto | metti i file in `public/photos/` e aggiungi i nomi all'array `photos` del ricordo in `memories.ts` (la prima è la copertina, le altre si sfogliano come un mazzo di polaroid) |
+| Foto del minigioco | metti i file in `public/photos/` e aggiungi i nomi all'array `photos` del ricordo in `memories.ts` (la prima è la copertina, le altre si sfogliano come un mazzo di polaroid) |
+| Polaroid della sezione "Ricordi" | metti le immagini in `src/assets/ricordi/` e basta: appaiono da sole. Il nome del file diventa la didascalia (`una-sera-a-roma.jpg` → "una sera a roma"); un prefisso numerico ordina senza apparire (`01-il-primo-bacio.jpg`). Cartella separata dalle foto del gioco: niente spoiler |
 
 Dopo ogni modifica:
 
