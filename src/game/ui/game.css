@@ -492,6 +492,8 @@
   width: min(92vw, 384px);
   max-height: calc(100vh - 2rem);
   overflow-y: auto;
+  /* la polaroid che si infila nel mazzo scivola oltre il bordo: niente scrollbar */
+  overflow-x: hidden;
   padding: 14px 14px 20px;
   background: #faf4e6;
   color: #2b2338;
@@ -598,6 +600,199 @@
 .rf-memory__close:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 22px #b23a6899;
+}
+
+/* ── mazzo di polaroid (più foto per ricordo) ─────────────────────
+   La copertina occupa la stessa inquadratura della foto singola;
+   dietro spuntano i bordi sfalsati delle altre. Avanti: la carta in
+   cima scivola di lato e si infila sotto il mazzo (rf-deck-tuck);
+   indietro: l'ultima riemerge e si appoggia sopra (rf-deck-untuck). */
+
+.rf-deck {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rf-deck__card {
+  position: absolute;
+  inset: 0;
+  background: #e8dfcc;
+  border: 1px solid #00000014;
+  transition:
+    transform 0.42s cubic-bezier(0.34, 1.45, 0.45, 1),
+    filter 0.42s ease,
+    opacity 0.3s ease;
+  will-change: transform;
+}
+
+.rf-deck__card img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* d0 = copertina; d1-d3 = bordi del mazzo, sfalsati e appena ruotati */
+.rf-deck__card--d0 {
+  z-index: 4;
+  --rf-rest: rotate(0deg);
+  transform: var(--rf-rest);
+}
+
+.rf-deck__card--d1 {
+  z-index: 3;
+  --rf-rest: translate(-7px, -5px) rotate(-3deg);
+  transform: var(--rf-rest);
+  filter: brightness(0.96);
+  box-shadow: 0 3px 9px #00000038;
+}
+
+.rf-deck__card--d2 {
+  z-index: 2;
+  --rf-rest: translate(6px, -3px) rotate(2.4deg);
+  transform: var(--rf-rest);
+  filter: brightness(0.92);
+  box-shadow: 0 3px 9px #00000030;
+}
+
+.rf-deck__card--d3 {
+  z-index: 1;
+  --rf-rest: translate(-2px, -7px) rotate(1.4deg);
+  transform: var(--rf-rest);
+  filter: brightness(0.9);
+  box-shadow: 0 3px 9px #00000028;
+}
+
+.rf-deck__card--hidden {
+  z-index: 0;
+  --rf-rest: rotate(0deg);
+  transform: var(--rf-rest);
+  opacity: 0;
+}
+
+/* avanti: la copertina scivola a destra e si infila sotto il mazzo */
+@keyframes rf-deck-tuck {
+  0% {
+    transform: rotate(0deg);
+    z-index: 6;
+  }
+  55% {
+    transform: translate(58%, 3%) rotate(8deg) scale(0.97);
+    z-index: 6;
+  }
+  62% {
+    z-index: 0;
+  }
+  100% {
+    transform: var(--rf-rest, translate(-7px, -5px) rotate(-3deg));
+    z-index: 0;
+  }
+}
+
+.rf-deck__card--tuck {
+  animation: rf-deck-tuck 0.44s cubic-bezier(0.45, 0.15, 0.35, 1) both;
+}
+
+/* indietro: l'ultima foto sguscia fuori dal mazzo e si appoggia sopra,
+   con un piccolo assestamento da polaroid */
+@keyframes rf-deck-untuck {
+  0% {
+    transform: translate(-7px, -5px) rotate(-3deg);
+    z-index: 0;
+  }
+  45% {
+    transform: translate(58%, 3%) rotate(8deg) scale(0.97);
+    z-index: 0;
+  }
+  52% {
+    z-index: 6;
+  }
+  72% {
+    transform: translate(4%, 0) rotate(-1.6deg);
+    z-index: 6;
+  }
+  100% {
+    transform: rotate(0deg);
+    z-index: 6;
+  }
+}
+
+.rf-deck__card--untuck {
+  animation: rf-deck-untuck 0.44s cubic-bezier(0.4, 0.2, 0.3, 1) both;
+}
+
+/* freccia + contatore, in alto a destra come gemelli del chip città */
+.rf-deck__nav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.rf-deck__count {
+  padding: 4px 7px;
+  font-family: var(--pixel);
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  color: #ffe9c4;
+  background: #070512d9;
+  border-radius: 3px;
+}
+
+.rf-deck__next {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0 0 3px;
+  font-family: var(--serif);
+  font-size: 26px;
+  line-height: 1;
+  color: var(--oro);
+  background: #070512d9;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+}
+
+.rf-deck__next:hover {
+  background: #070512f5;
+  transform: translateX(1px);
+}
+
+.rf-deck__next:focus-visible {
+  outline: 2px solid var(--oro);
+  outline-offset: 2px;
+}
+
+@media (pointer: coarse) {
+  .rf-deck__next {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* movimento ridotto: niente scivolate, solo un crossfade delicato */
+@media (prefers-reduced-motion: reduce) {
+  .rf-deck__card {
+    transition: opacity 0.35s ease;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+
+  .rf-deck__card:not(.rf-deck__card--d0) {
+    opacity: 0;
+  }
 }
 
 /* ══════════════ Aggiustamenti touch ══════════════ */

@@ -10,6 +10,8 @@
  *    il Bastione dei Pescatori e il Ponte delle Catene sospeso su un vero
  *    canale d'acqua che sfocia nel Danubio: l'impalcato tra le due torri
  *    si attraversa a piedi, con l'acqua che luccica sotto le arcate.
+ *    A est, il parco del ghiaccio: la pista di pattinaggio bordata di
+ *    legno e la ruota panoramica accesa che veglia sui pattinatori.
  */
 import type { Scene } from './types'
 import {
@@ -24,6 +26,7 @@ import {
   notteCupola,
   ponteTorreNotte,
   ponteCampataNotte,
+  ruota,
 } from '../art/buildings/budapest'
 
 /* ────────────────────────────────────────────────────────────────────────
@@ -125,17 +128,20 @@ export const danubioScene: Scene = {
 }
 
 /* ────────────────────────────────────────────────────────────────────────
- * BUDAPEST — 28×22, la città d'oro di notte. In alto a sinistra la terrazza
- * del Bastione (scale al centro della siepe), a destra il Parlamento con la
+ * BUDAPEST — 34×22, la città d'oro di notte. In alto a sinistra la terrazza
+ * del Bastione (scale al centro della siepe), al centro il Parlamento con la
  * piazza; in basso a sinistra il canale che sfocia nel Danubio, attraversato
  * dal Ponte delle Catene: due torri di pietra sulle sponde e l'impalcato
  * calpestabile in mezzo, con l'acqua che passa sotto le arcate. A sud la
- * banchina e il molo di legno da cui si riparte in barca.
+ * banchina e il molo di legno da cui si riparte in barca. Sul lato est,
+ * oltre i giardini del Parlamento, il parco del ghiaccio: la pista bordata
+ * da un cordolo di legno (varco a sud, passerella verso la strada) e,
+ * subito dietro, la grande ruota panoramica illuminata.
  * ──────────────────────────────────────────────────────────────────────── */
 export const budapestScene: Scene = {
   id: 'budapest',
   name: 'Budapest — La fuga romantica',
-  width: 28,
+  width: 34,
   height: 22,
   ambience: 'night',
   legend: {
@@ -143,41 +149,46 @@ export const budapestScene: Scene = {
     c: { base: 'cobble' },
     s: { base: 'sidewalk' },
     a: { base: 'path' }, // scalinata del Bastione
-    w: { base: 'wood' }, // molo
+    w: { base: 'wood' }, // molo, passerella e varco della pista
     g: { base: 'grass' },
     G: { base: 'grass2' },
     f: { base: 'flowers' },
     T: { base: 'tallGrass' },
     h: { base: 'hedge', solid: true }, // parapetto della terrazza
     E: { base: 'deepWater', solid: true }, // il Danubio e il canale
+    I: { base: 'ice' }, // la pista di pattinaggio: ci si scivola sopra
+    b: { base: 'wood', solid: true }, // cordolo basso di legno della pista
   },
   ground: [
-    'ppppppppppppppgGggfggGfggGgT',
-    'ppppppppppppppGgfgGgfgggTggG',
-    'ppppppppppppppggGpppppppgfgG',
-    'ppppppppppppppgGgpppppppGgfg',
-    'ppppppppppppppfggpppppppgGgg',
-    'ppppppppppppppgGfpppppppfggT',
-    'ppppppppppppppgggpppppppgGgg',
-    'hhhhhhaahhhhhhgfGpppppppggfG',
-    'cccccccccccccccppppppppppppg',
-    'cccccccccccccccppppppppppppG',
-    'ccccccccppppppccccccccccfgGf',
-    'ccccccccppppppccccccccccgfgg',
-    'ccEEEEccppppppccccccccccTTgG',
-    'ccEEEEccccccccccccccccffffTG',
-    'ccEEEEccccccccccccccccffffGT',
-    'ccppppccccccccccccccccccccgg',
-    'ccEEEEcccccccccccccccccccccc',
-    'ccEEEEcccccccccccccccccccccc',
-    'ssEEEEssssssssssssssssssssss',
-    'ssEEEEssssssswwsssssssssssss',
-    'EEEEEEEEEEEEEwwEEEEEEEEEEEEE',
-    'EEEEEEEEEEEEEwwEEEEEEEEEEEEE',
+    'ppppppppppppppgGggfggGfggGggGgfggG',
+    'ppppppppppppppGgfgGgfgggTggfgGggfg',
+    'ppppppppppppppggGpppppppgfggfgGggf',
+    'ppppppppppppppgGgpppppppGggGgfggGg',
+    'ppppppppppppppfggpppppppgGgfggGgfg',
+    'ppppppppppppppgGfpppppppfgggGgfggG',
+    'ppppppppppppppgggpppppppgGgfgGggfg',
+    'hhhhhhaahhhhhhgfGpppppppgggfgggfgg',
+    'cccccccccccccccppppppppppppbbbbbbb',
+    'cccccccccccccccppppppppppppbIIIIIb',
+    'ccccccccppppppccccccccccfggbIIIIIb',
+    'ccccccccppppppccccccccccgfgbIIIIIb',
+    'ccEEEEccppppppccccccccccTTgbIIIIIb',
+    'ccEEEEccccccccccccccccffffgbbbwbbb',
+    'ccEEEEccccccccccccccccffffggfgwgfg',
+    'ccppppccccccccccccccccccccggggwggg',
+    'ccEEEEcccccccccccccccccccccccccccc',
+    'ccEEEEcccccccccccccccccccccccccccc',
+    'ssEEEEssssssssssssssssssssssssssss',
+    'ssEEEEssssssswwsssssssssssssssssss',
+    'EEEEEEEEEEEEEwwEEEEEEEEEEEEEEEEEEE',
+    'EEEEEEEEEEEEEwwEEEEEEEEEEEEEEEEEEE',
   ],
   buildings: [
     { sprite: bastione, x: 2, y: 0, solid: { x: 0, y: 2, w: 7, h: 3 } },
     { sprite: parlamento, x: 17, y: 2, solid: { x: 0, y: 3, w: 7, h: 3 } },
+    // la ruota panoramica, subito a nord della pista: solida solo alla base
+    // delle gambe, così si passeggia dietro al grande cerchio illuminato
+    { sprite: ruota, x: 27, y: 0, solid: { x: 0, y: 5, w: 6, h: 2 } },
     // il Ponte delle Catene: una torre per sponda, l'impalcato è di tile
     { sprite: ponteTorreCitta, x: 0, y: 11, solid: { x: 0, y: 2, w: 2, h: 2 } },
     { sprite: ponteTorreCitta, x: 6, y: 11, solid: { x: 0, y: 2, w: 2, h: 2 } },
@@ -198,7 +209,7 @@ export const budapestScene: Scene = {
     { prop: 'tree', x: 25, y: 1 },
     { prop: 'tree', x: 24, y: 5 },
     { prop: 'cypress', x: 16, y: 4 },
-    { prop: 'cypress', x: 27, y: 3 },
+    { prop: 'cypress', x: 26, y: 2 },
     { prop: 'pot', x: 18, y: 8 },
     { prop: 'pot', x: 22, y: 8 },
     { prop: 'lamp', x: 15, y: 9 },
@@ -231,6 +242,14 @@ export const budapestScene: Scene = {
     { prop: 'lamp', x: 15, y: 17 },
     { prop: 'pot', x: 0, y: 17 },
     { prop: 'pot', x: 27, y: 17 },
+    // il parco del ghiaccio: lampioni al varco, panchina per i pattini,
+    // banchetto della cioccolata calda accanto alla passerella
+    { prop: 'lamp', x: 27, y: 14 },
+    { prop: 'lamp', x: 33, y: 14 },
+    { prop: 'bench', x: 28, y: 14 },
+    { prop: 'table', x: 31, y: 15 },
+    { prop: 'barrel', x: 33, y: 15 },
+    { prop: 'lamp', x: 33, y: 16 },
     // la banchina sul Danubio
     { prop: 'bench', x: 7, y: 18 },
     { prop: 'bench', x: 21, y: 18 },
@@ -270,6 +289,16 @@ export const budapestScene: Scene = {
       ],
       memoryId: 'bud-bastione',
     },
+    {
+      x: 28,
+      y: 13,
+      label: 'La pista di ghiaccio',
+      lines: [
+        'Lame che disegnano cerchi, fiato che diventa nuvolette.',
+        'Tienimi la mano: se cadiamo, cadiamo insieme.',
+      ],
+      memoryId: 'bud-ghiaccio',
+    },
   ],
   npcs: [
     {
@@ -296,6 +325,32 @@ export const budapestScene: Scene = {
       wander: true,
       label: 'Una signora sul lungofiume',
       lines: ['Ogni sera vengo a salutare il fiume.', 'Stanotte le luci sembrano accese apposta per voi.'],
+    },
+    {
+      character: 'npcKid',
+      x: 29,
+      y: 11,
+      dir: 'right',
+      wander: true,
+      label: 'Un pattinatore piccolo',
+      lines: ['Guarda! So andare all’indietro… quasi!', 'Se cadi, ridi: è la regola della pista.'],
+    },
+    {
+      character: 'npcWoman',
+      x: 31,
+      y: 10,
+      dir: 'down',
+      wander: true,
+      label: 'Una pattinatrice',
+      lines: ['Che eleganza, voi due mano nella mano!', 'La ruota gira, noi giriamo… stanotte gira tutto d’amore.'],
+    },
+    {
+      character: 'npcNonna',
+      x: 32,
+      y: 14,
+      dir: 'left',
+      label: 'La signora della cioccolata',
+      lines: ['Cioccolata calda! Scalda le mani e pure i cuori.', 'Due tazze? Lo sapevo prima ancora che arrivaste.'],
     },
   ],
   exits: [

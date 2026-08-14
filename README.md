@@ -16,7 +16,7 @@ L'ingresso è protetto da una domanda dolce. **Password provvisoria durante i la
 | Testi/date dei ricordi nel gioco | `src/content/memories.ts` |
 | Lettere di "pensieri dolci" (aggiungine quando vuoi!) | `src/content/letters.ts` |
 | Motivi del bottone "un motivo per cui ti amo" | `src/content/reasons.ts` |
-| Foto vere | metti i file in `public/photos/` al posto degli `.svg` segnaposto (stesso nome; se usi `.jpg` aggiorna il campo `photo` in `memories.ts`) |
+| Foto | metti i file in `public/photos/` e aggiungi i nomi all'array `photos` del ricordo in `memories.ts` (la prima è la copertina, le altre si sfogliano come un mazzo di polaroid) |
 
 Dopo ogni modifica:
 

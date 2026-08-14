@@ -417,23 +417,44 @@ const rock = sprite([
   'CCCCCnCCCcCCCCCC',
 ])
 
-// ghiaccio della pista: lucido, azzurro chiarissimo, con graffi di pattini
-const ice = sprite([
+// ghiaccio della pista: lucido, azzurro chiarissimo, con i graffi lasciati
+// dai pattini (tratti diagonali A) e scintillii bianchi che si spostano
+// piano tra i due frames — uno shimmer sottile, non un lampeggio.
+const ice0 = sprite([
   'iiiiiiiiiiiiiiii',
-  'iiwwiiiiiiiiiiii',
-  'iiiiwwiiiiiAiiii',
+  'iiwiiiiiiiiiAiii',
+  'iiiwiiiiiAAiiiii',
+  'iiiiiiiAAiiiiiii',
+  'iAiiiiiiiiiiiwii',
+  'iiAAiiiiiiiiiiii',
+  'iiiiAiiiiiwiiiii',
   'iiiiiiiiiiiiiiii',
-  'iAiiiiiiiwwiiiii',
-  'iiiiiiiiiiiwwiii',
-  'iiiiiwiiiiiiiiii',
+  'iiiiiiiAiiiiiiii',
+  'iiwiiiiiAAiiiiii',
+  'iiiiiiiiiiAAiiwi',
+  'iAiiiiiiiiiiiiii',
+  'iiAAiiiwiiiiiiii',
+  'iiiiAiiiiiiiAAii',
+  'iiiiiiiiiiiAiiii',
   'iiiiiiiiiiiiiiii',
-  'iiiiiiiiAiiiiiii',
-  'iiwwiiiiiiiiiwwi',
-  'iiiiwwiiiiiiiiiw',
+])
+
+const ice1 = sprite([
   'iiiiiiiiiiiiiiii',
-  'iiiiiiiwwiiiiiii',
-  'iAiiiiiiiwiiiiii',
-  'iiiiiiiiiiiiAiii',
+  'iiiiiiwiiiiiAiii',
+  'iiiiiiiiiAAiiiwi',
+  'iiiiiiiAAiiiiiii',
+  'iAiiiiiiiiiiiiii',
+  'iiAAiiiiiiiiwiii',
+  'iiiiAiiiiiiiiiii',
+  'iwiiiiiiiiiiiiii',
+  'iiiiiiiAiiiiiiii',
+  'iiiiiiiiAAiiiwii',
+  'iiiiiiiiiiAAiiii',
+  'iAiiiiwiiiiiiiii',
+  'iiAAiiiiiiiiiiii',
+  'iiiiAiiiiiiiAAii',
+  'iiiiiiiiiiiAiiii',
   'iiiiiiiiiiiiiiii',
 ])
 
@@ -477,5 +498,5 @@ export const TILES: Record<TileKey, TileSpec> = {
   hedge: { frames: [hedge] },
   rock: { frames: [rock] },
   snow: { frames: [snow] },
-  ice: { frames: [ice] },
+  ice: { frames: [ice0, ice1] },
 }

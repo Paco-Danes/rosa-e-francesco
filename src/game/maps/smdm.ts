@@ -1,30 +1,36 @@
 /**
- * SANTA MARIA DELLE MOLE — «Casa», il paese del cuore di Rosa.
+ * ROMA, SANTA MARIA E DINTORNI — «Casa», la zona mista del cuore.
  *
- * La scena più affettuosa del gioco: la piazza con la rotonda e la chiesa,
- * la casetta di Rosa con le rose rampicanti e il gatto sul vialetto, la
- * palestra "Il Gabbiano" dove vola l'acrobata, il caffè "Officine Ibba"
- * delle domeniche lente. Petali di rosa cadono sul giardino di casa.
+ * Nessun realismo geografico: un piccolo mondo affettuoso che tiene insieme
+ * il Colosseo sulla sua piazza, la rotonda con la chiesa di Santa Maria,
+ * le Officine Ibba, la palestra "Il Gabbiano" col gabbiano sul tetto,
+ * la casetta col tetto rosso, i due laghetti gemelli di Albano e Nemi
+ * e — in alto a nord-est — l'angolo innevato di Ovindoli con la cabinovia.
  *
  * Legenda ground:  g erba · e erba con ciuffi · t erba alta · f fiorellini
  *                  p sentiero · S sentiero coi sassi · s marciapiede
- *                  a asfalto · P sagrato/piazza · c ciottolato · h siepe
+ *                  a asfalto · P piazza/sagrato · c ciottolato · h siepe
+ *                  r roccia · n neve · w acqua · d acqua profonda
+ *                  W riva bagnata (calpestabile)
  */
 import type { Scene } from './types'
 import {
+  smdmCabinovia,
   smdmCasaRosa,
   smdmChiesa,
+  smdmColosseo,
   smdmGabbiano,
   smdmIbba,
   smdmNoemi,
   smdmRamona,
+  smdmStazioneOvindoli,
 } from '../art/buildings/smdm'
 
 export const smdmScene: Scene = {
   id: 'smdm',
-  name: 'Santa Maria delle Mole — Casa',
-  width: 28,
-  height: 20,
+  name: 'Roma, Santa Maria e dintorni',
+  width: 38,
+  height: 28,
   ambience: 'day',
   legend: {
     g: { base: 'grass' },
@@ -38,88 +44,149 @@ export const smdmScene: Scene = {
     P: { base: 'plaza' },
     c: { base: 'cobble' },
     h: { base: 'hedge', solid: true },
+    r: { base: 'rock', solid: true },
+    n: { base: 'snow' },
+    w: { base: 'water', solid: true },
+    d: { base: 'deepWater', solid: true },
+    W: { base: 'sandWet' },
   },
-  //         0123456789012345678901234567
+  //         01234567890123456789012345678901234567
   ground: [
-    'hhhhhhhhhhhhhhhhhhhhhhhhhhhh', //  0  siepe di confine
-    'hfggggfgeggfggegfggggggggggh', //  1  giardino di casa · retro chiesa
-    'hggggggggfegggggeggggggggggh', //  2
-    'hfgggggeggfgfggeggfggggggggh', //  3
-    'hgggggfggegggeggfggeggggggfh', //  4
-    'hfgggggfgggeggfggegggggggggh', //  5
-    'hggppgggfgeggfgggfegggggggfh', //  6  porta di casa Rosa
-    'ggepppppppppssssssssPPPPPPgg', //  7  viale + sagrato della chiesa
-    'gegpppppppppsaaaaaaaaasggggg', //  8  anello nord della rotonda
-    'ggggggggegggsaaaaaaaaasggggg', //  9
-    'gggggggfggegsaaafffaaasggggg', // 10  aiuola della rotonda
-    'gggggggggeggsaaafffaaasggggg', // 11
-    'ggggggggggfesaaafffaaasccccc', // 12  dehors delle Officine
-    'gpppppppppppsaaaaaaaaasccccc', // 13  davanti alla palestra
-    'gpppppppppppsaaaaaaaaasccccc', // 14  anello sud
-    'gggegggtgeggssssaasssssgggeg', // 15  attraversamento pedonale
-    'tgeSSSSSSSSSSSSsaasggeggfggt', // 16  vialetto del parco
-    'tegSSSSSSSSSSSSsaasgegtggggt', // 17
-    'tggegfggggeggfgsaasegtgfgegt', // 18
-    'ttggeggtgggegggaaaaggetgggtt', // 19  uscita verso il mondo
+    'hhhhhhhhhhhhhhhhhhhhhhhhhhrrrrrrrrrrrr', //  0  siepe di confine - creste di Ovindoli
+    'ggegfggggggegppgfgeggetgggrnnnnnnnnnnn', //  1  neve dietro la cabinovia
+    'gPPPPPPPPPPPPppgegfggtggegrnnnnnnnnnnn', //  2  piazza del Colosseo
+    'ePPPPPPPPPPPPppggegfgeggtgrnnnnnnnnnrn', //  3  base del pilone destro
+    'gPPPPPPPPPPPPppfgeggegtggernnnnnnnnnnn', //  4  stazioncina della cabinovia
+    'gPPPPPPPPPPPPppgegtggfgetgrnnnnnnnnnnn', //  5
+    'ePPPPPPPPPPPPppggfgegetgtgrnnnnnnnnnnn', //  6  fronte della stazioncina
+    'gPPPPPPPPPPPPppgeggetggfggrrrrnnrrrrrr', //  7  varco nella roccia verso la neve
+    'gPPPPPPPPPPPPpppppppppppppppppppgegtgg', //  8  passeggiata verso Ovindoli
+    'gfgeggfgeggegpppppppppppppppppppgfgetg', //  9
+    'ggeggegfgggegppgefggtggegfgeggtgegfgeg', // 10  parco fra i quartieri
+    'ggggggggggsssssssssgegfggWWWWgggggfgeg', // 11  riva nord del lago Albano
+    'gggggggPPPsaaaaaaassssssWwwwwWggggWWWg', // 12  panchina belvedere fra i laghi
+    'gPPPPPPPPPsaafffaasaaaaaWwddwWgggWwwwW', // 13  rotonda - strada per i laghi
+    'gPPPPPPPPPsaafffaasaaaaaWwddwWgggWwdwW', // 14  aiuola fiorita al centro
+    'gPPPPPPPPPsaafffaassssssWwwwwWgggWwwwW', // 15
+    'gPPPPPPPPPsaaaaaaasgfgeggWWWWgggggWWWg', // 16  sagrato della chiesa
+    'gPPPPPPPPPsssssssssgegfgeggtggegfggegg', // 17
+    'ggefggegtggesaasgegfggeggegtggefggetgg', // 18  strada verso sud
+    'ggggggghhhhhsaasggggggggggggegfgetggeg', // 19  giardinetto del Gabbiano
+    'ggggggghgfghsaasggggggggggggetggegfgge', // 20  la casa - le Officine
+    'ggggggghggghsaasggggggggggggfgegtggegf', // 21
+    'ggggggghgeghsaasgggggggggggggetggfgegg', // 22
+    'gSSSSSShggghsaasgggggcccccccgegfggetgg', // 23  fronte palestra - dehors Ibba
+    'gSSSSSShhphhsaasgSSggcccccccgetggegfge', // 24  varco del giardinetto - vialetto di casa
+    'gpppppppppppsaasppppppppppppgfgegtgegg', // 25  stradina del quartiere sud
+    'ggegfggetggesaasppppppppppppgfgegtgegg', // 26
+    'ttttttttttttaaaatttttttttttttttttttttt', // 27  uscita verso il mondo
   ],
   buildings: [
-    // Casa di Rosa: la casetta più adorabile, il tetto rosso e le rose
-    { sprite: smdmCasaRosa, x: 2, y: 1, solid: { x: 0, y: 2, w: 4, h: 3 } },
-    // La chiesa di travertino affacciata sul sagrato della piazza
-    { sprite: smdmChiesa, x: 20, y: 1, solid: { x: 0, y: 3, w: 6, h: 3 } },
-    // Palestra "Il Gabbiano", dove Rosa vola
-    { sprite: smdmGabbiano, x: 1, y: 9, solid: { x: 0, y: 2, w: 6, h: 2 } },
+    // Il Colosseo, showpiece romano sulla sua piazza
+    { sprite: smdmColosseo, x: 3, y: 1, solid: { x: 0, y: 2, w: 6, h: 3 } },
+    // La chiesa di travertino affacciata sul sagrato
+    { sprite: smdmChiesa, x: 1, y: 10, solid: { x: 0, y: 3, w: 6, h: 3 } },
+    // La cabinovia di Ovindoli: piloni, fune e cabinetta
+    { sprite: smdmCabinovia, x: 31, y: 0, solid: { x: 0, y: 3, w: 1, h: 1 } },
+    // La stazioncina di legno alla base della neve
+    { sprite: smdmStazioneOvindoli, x: 27, y: 3, solid: { x: 0, y: 1, w: 4, h: 2 } },
+    // Palestra "Il Gabbiano", col gabbiano scultoreo sul tetto
+    { sprite: smdmGabbiano, x: 1, y: 18, solid: { x: 0, y: 2, w: 6, h: 3 } },
+    // La nostra casa, tetto rosso e comignolo
+    { sprite: smdmCasaRosa, x: 16, y: 19, solid: { x: 0, y: 2, w: 4, h: 3 } },
     // Caffè "Officine Ibba", mattoni e cornetti
-    { sprite: smdmIbba, x: 23, y: 8, solid: { x: 0, y: 2, w: 5, h: 2 } },
+    { sprite: smdmIbba, x: 22, y: 19, solid: { x: 0, y: 2, w: 5, h: 2 } },
   ],
   props: [
-    // giardino di casa Rosa
-    { prop: 'tree', x: 7, y: 2 },
-    { prop: 'tree', x: 10, y: 4 },
-    { prop: 'roseBush', x: 2, y: 6 },
-    { prop: 'roseBush', x: 5, y: 6 },
-    { prop: 'flowerPatch', x: 9, y: 6 },
-    { prop: 'flowerPatch', x: 13, y: 3 },
-    { prop: 'bush', x: 14, y: 2 },
-    { prop: 'bush', x: 17, y: 3 },
-    { prop: 'cat', x: 3, y: 7 },
+    // piazza del Colosseo: lampioni e pini romani
+    { prop: 'lamp', x: 1, y: 3 },
+    { prop: 'lamp', x: 12, y: 3 },
+    { prop: 'lamp', x: 1, y: 8 },
+    { prop: 'lamp', x: 12, y: 8 },
+    { prop: 'pine', x: 10, y: 2 },
+    { prop: 'pine', x: 2, y: 8 },
+    { prop: 'cypress', x: 0, y: 6 },
+    // parco fra i quartieri
+    { prop: 'tree', x: 16, y: 3 },
+    { prop: 'tree', x: 21, y: 4 },
+    { prop: 'pine', x: 24, y: 2 },
+    { prop: 'bush', x: 15, y: 5 },
+    { prop: 'bush', x: 22, y: 6 },
+    { prop: 'lamp', x: 19, y: 7 },
+    { prop: 'lamp', x: 25, y: 7 },
+    { prop: 'tree', x: 23, y: 10 },
+    // angolo Ovindoli: abeti fra la neve e rocce
+    { prop: 'pine', x: 28, y: 1 },
+    { prop: 'pine', x: 35, y: 5 },
+    { prop: 'pine', x: 33, y: 6 },
+    { prop: 'rocks', x: 36, y: 6 },
     // chiesa e sagrato
-    { prop: 'cypress', x: 19, y: 2 },
-    { prop: 'cypress', x: 26, y: 2 },
-    { prop: 'bench', x: 13, y: 7 },
-    { prop: 'lamp', x: 12, y: 7 },
-    // la rotonda: aiuola con la statuina e le rose
-    { prop: 'statue', x: 17, y: 11 },
-    { prop: 'roseBush', x: 18, y: 10 },
-    { prop: 'roseBush', x: 16, y: 12 },
-    // palestra "Il Gabbiano"
-    { prop: 'pot', x: 2, y: 13 },
-    { prop: 'pot', x: 5, y: 13 },
-    { prop: 'gull', x: 7, y: 12 },
-    { prop: 'gull', x: 9, y: 10 },
-    // dehors delle Officine Ibba
-    { prop: 'table', x: 23, y: 13 },
-    { prop: 'table', x: 26, y: 13 },
-    { prop: 'pot', x: 27, y: 12 },
-    { prop: 'barrel', x: 27, y: 14 },
-    // parco a sud e viale d'ingresso
-    { prop: 'lamp', x: 12, y: 15 },
-    { prop: 'lamp', x: 22, y: 15 },
+    { prop: 'cypress', x: 7, y: 11 },
+    { prop: 'cypress', x: 0, y: 13 },
+    { prop: 'pot', x: 2, y: 16 },
+    { prop: 'pot', x: 6, y: 16 },
+    { prop: 'bench', x: 8, y: 16 },
+    // la rotonda: statuina e rose nell'aiuola
+    { prop: 'statue', x: 14, y: 14 },
+    { prop: 'roseBush', x: 13, y: 13 },
+    { prop: 'roseBush', x: 15, y: 15 },
+    { prop: 'lamp', x: 10, y: 11 },
     { prop: 'lamp', x: 18, y: 17 },
-    { prop: 'tree', x: 1, y: 15 },
-    { prop: 'bench', x: 5, y: 15 },
-    { prop: 'tree', x: 8, y: 18 },
-    { prop: 'flowerPatch', x: 5, y: 18 },
-    { prop: 'bench', x: 24, y: 15 },
-    { prop: 'olive', x: 20, y: 16 },
-    { prop: 'pine', x: 26, y: 16 },
-    { prop: 'flowerPatch', x: 24, y: 16 },
+    // i due laghetti: belvedere, boe e gabbiani
+    { prop: 'bench', x: 30, y: 12 },
+    { prop: 'tree', x: 21, y: 11 },
+    { prop: 'tree', x: 33, y: 11 },
+    { prop: 'buoy', x: 25, y: 13 },
+    { prop: 'buoy', x: 36, y: 14 },
+    { prop: 'gull', x: 24, y: 12 },
+    { prop: 'gull', x: 28, y: 16 },
     { prop: 'tree', x: 24, y: 17 },
+    { prop: 'tree', x: 35, y: 17 },
+    { prop: 'flowerPatch', x: 28, y: 17 },
+    { prop: 'flowerPatch', x: 33, y: 17 },
+    // palestra "Il Gabbiano" e giardinetto recintato
+    { prop: 'pot', x: 1, y: 23 },
+    { prop: 'tree', x: 8, y: 21 },
+    { prop: 'flowerPatch', x: 10, y: 20 },
+    { prop: 'roseBush', x: 10, y: 23 },
+    // la nostra casa: rose e gatto sul vialetto
+    { prop: 'roseBush', x: 16, y: 24 },
+    { prop: 'roseBush', x: 19, y: 24 },
+    { prop: 'cat', x: 18, y: 25 },
+    { prop: 'lamp', x: 12, y: 19 },
+    { prop: 'lamp', x: 15, y: 24 },
+    // dehors delle Officine Ibba
+    { prop: 'table', x: 22, y: 24 },
+    { prop: 'table', x: 25, y: 24 },
+    { prop: 'pot', x: 27, y: 23 },
+    { prop: 'barrel', x: 27, y: 24 },
+    // angolo dei Castelli a sud-est: ulivi, vite e botte
+    { prop: 'olive', x: 30, y: 20 },
+    { prop: 'pine', x: 34, y: 20 },
+    { prop: 'tree', x: 31, y: 23 },
+    { prop: 'vine', x: 29, y: 25 },
+    { prop: 'barrel', x: 31, y: 25 },
+    { prop: 'flowerPatch', x: 33, y: 24 },
+    { prop: 'bush', x: 36, y: 22 },
+    { prop: 'tree', x: 34, y: 26 },
+    // prato a sud-ovest
+    { prop: 'tree', x: 2, y: 26 },
+    { prop: 'bench', x: 8, y: 26 },
   ],
   signs: [
     {
-      x: 16,
-      y: 10,
+      x: 5,
+      y: 7,
+      label: 'Il Colosseo',
+      lines: [
+        'Roma caput mundi: il Colosseo, i gladiatori, i turisti.',
+        'E noi due con le mani in pasta, a impastare ridendo la pizza più bella della città eterna.',
+      ],
+      memoryId: 'smdm-colosseo',
+    },
+    {
+      x: 13,
+      y: 15,
       label: 'La piazza con la rotonda',
       lines: [
         'La rotonda, i lampioni, il giro lento della piazza.',
@@ -128,12 +195,12 @@ export const smdmScene: Scene = {
       memoryId: 'smdm-piazza',
     },
     {
-      x: 4,
-      y: 6,
+      x: 17,
+      y: 24,
       kind: 'none',
-      label: 'Casa di Rosa',
+      label: 'La nostra casa',
       lines: [
-        'Le rose sul muro, le finestre accese, il gatto sul vialetto.',
+        'Il tetto rosso, il comignolo che fuma, le rose sul vialetto.',
         'Il posto più bello del mondo non è su nessuna mappa.',
         'È qui, dove ci sei tu.',
       ],
@@ -141,7 +208,7 @@ export const smdmScene: Scene = {
     },
     {
       x: 6,
-      y: 13,
+      y: 23,
       label: 'Palestra "Il Gabbiano"',
       lines: [
         'Qui dentro vola un\'acrobata.',
@@ -150,8 +217,8 @@ export const smdmScene: Scene = {
       memoryId: 'smdm-gabbiano',
     },
     {
-      x: 25,
-      y: 13,
+      x: 21,
+      y: 23,
       label: 'Officine Ibba',
       lines: [
         'Il nostro tavolino è quello vicino alla vetrina.',
@@ -160,8 +227,28 @@ export const smdmScene: Scene = {
       memoryId: 'smdm-ibba',
     },
     {
-      x: 23,
-      y: 7,
+      x: 32,
+      y: 5,
+      label: 'La neve di Ovindoli',
+      lines: [
+        'La neve che scricchiola, la cabinovia che sale piano piano.',
+        'I guanti non bastano mai: le tue mani nelle mie, invece, sì.',
+      ],
+      memoryId: 'smdm-ovindoli',
+    },
+    {
+      x: 31,
+      y: 14,
+      label: 'I laghi di Albano e Nemi',
+      lines: [
+        'Due laghi vicini vicini, ognuno col suo carattere.',
+        'Come noi: bellissimi insieme. E a Nemi, le fragoline.',
+      ],
+      memoryId: 'smdm-laghi',
+    },
+    {
+      x: 4,
+      y: 16,
       kind: 'none',
       label: 'La chiesa sulla piazza',
       lines: [
@@ -173,8 +260,8 @@ export const smdmScene: Scene = {
   npcs: [
     {
       character: 'npcNonna',
-      x: 20,
-      y: 7,
+      x: 8,
+      y: 15,
       dir: 'down',
       wander: true,
       label: 'Nonna in piazza',
@@ -185,26 +272,18 @@ export const smdmScene: Scene = {
     },
     {
       character: 'npcKid',
-      x: 15,
-      y: 9,
+      x: 10,
+      y: 6,
       dir: 'right',
       wander: true,
       label: 'Bimbo di corsa',
-      lines: ['Dieci giri della rotonda senza fermarmi! Contali!', 'Pronti… via!'],
-    },
-    {
-      character: 'npcMan',
-      x: 26,
-      y: 14,
-      dir: 'left',
-      label: 'Il barista delle Officine',
-      lines: ['Il solito tavolino? Ve lo tengo sempre da parte.', 'Due cornetti, lo so già.'],
+      lines: ['Un giro del Colosseo senza fermarmi! Contami i secondi!', 'Pronti… via!'],
     },
     {
       character: 'npcWoman',
       custom: smdmRamona,
-      x: 3,
-      y: 13,
+      x: 2,
+      y: 23,
       dir: 'down',
       label: 'Ramona',
       lines: [
@@ -216,8 +295,8 @@ export const smdmScene: Scene = {
     {
       character: 'npcWoman',
       custom: smdmNoemi,
-      x: 7,
-      y: 14,
+      x: 4,
+      y: 24,
       dir: 'down',
       label: 'Noemi',
       lines: [
@@ -227,7 +306,7 @@ export const smdmScene: Scene = {
       ],
     },
   ],
-  exits: [{ x: 15, y: 19, w: 4, h: 1, to: 'overworld' }],
-  spawn: { x: 16, y: 18, dir: 'up' },
-  effects: [{ type: 'petals', x: 0, y: 0, w: 12, h: 9 }],
+  exits: [{ x: 12, y: 27, w: 4, h: 1, to: 'overworld' }],
+  spawn: { x: 13, y: 26, dir: 'up' },
+  effects: [{ type: 'petals', x: 15, y: 18, w: 6, h: 8 }],
 }

@@ -616,3 +616,69 @@ function buildPonteCampataNotte(): PixelSprite {
 
 export const ponteCampataNotte = buildPonteCampataNotte()
 
+/* ────────────────────────────────────────────────────────────────────────
+ * LA RUOTA PANORAMICA — 96×112, stile «Budapest Eye» di notte. Cerchio
+ * sottile con perle di luce come le catene del ponte, dodici raggi, cabine
+ * ovali illuminate distribuite sul cerchio, mozzo d'oro acceso e due gambe
+ * ad A con basamenti di pietra. Va posta a nord della pista di ghiaccio:
+ * solida SOLO alla base delle gambe, così Rosa può passarle dietro.
+ * ──────────────────────────────────────────────────────────────────────── */
+function buildRuota(): PixelSprite {
+  const g = grid(96, 112)
+  const cx = 47.5
+  const cy = 45
+  const R = 40
+
+  // le due gambe ad A, dal mozzo giù fino ai basamenti
+  for (let y = 52; y <= 103; y++) {
+    const t = (y - 52) / 51
+    const xl = Math.round(46 - 19 * t)
+    const xr = Math.round(49 + 19 * t)
+    paint(g, xl, y, 'Kk')
+    paint(g, xr - 1, y, 'kK')
+  }
+  // traversa orizzontale che chiude la «A»
+  paint(g, 34, 88, 'k'.repeat(28))
+  // basamenti di pietra dei piedi
+  for (let y = 104; y <= 110; y++) {
+    paint(g, 24, y, 'K' + 'N'.repeat(6) + 'K')
+    paint(g, 64, y, 'K' + 'N'.repeat(6) + 'K')
+  }
+  paint(g, 24, 111, 'K'.repeat(8))
+  paint(g, 64, 111, 'K'.repeat(8))
+
+  // dodici raggi sottili
+  for (let s = 0; s < 12; s++) {
+    const th = (Math.PI * s) / 6
+    for (let r = 6; r <= R - 3; r++) {
+      pset(g, Math.round(cx + r * Math.cos(th)), Math.round(cy + r * Math.sin(th)), 'x')
+    }
+  }
+  // cerchio: bordo esterno scuro + filo interno più chiaro
+  for (let a = 0; a < 1440; a++) {
+    const th = (Math.PI * a) / 720
+    pset(g, Math.round(cx + R * Math.cos(th)), Math.round(cy + R * Math.sin(th)), 'X')
+    pset(g, Math.round(cx + (R - 2) * Math.cos(th)), Math.round(cy + (R - 2) * Math.sin(th)), 'x')
+  }
+  // perle di luce lungo il cerchio, come la collana del Ponte delle Catene
+  for (let a = 0; a < 48; a++) {
+    const th = (Math.PI * a) / 24
+    pset(g, Math.round(cx + R * Math.cos(th)), Math.round(cy + R * Math.sin(th)), a % 2 === 0 ? 'Y' : 'y')
+  }
+  // cabine ovali accese, appese appena fuori dal cerchio
+  const cabina = ['.KKK.', 'KyYyK', 'KyyyK', '.KKK.']
+  for (let s = 0; s < 12; s++) {
+    const th = (Math.PI * s) / 6
+    const x = Math.round(cx + (R + 3) * Math.cos(th)) - 2
+    const y = Math.round(cy + (R + 3) * Math.sin(th)) - 1
+    cabina.forEach((rw, i) => paint(g, x, y + i, rw))
+  }
+  // mozzo luminoso al centro
+  const mozzo = ['..KK..', '.KyyK.', 'KyYYyK', 'KyYYyK', '.KyyK.', '..KK..']
+  mozzo.forEach((rw, i) => paint(g, 45, 42 + i, rw))
+
+  return toSprite(g)
+}
+
+export const ruota = buildRuota()
+
