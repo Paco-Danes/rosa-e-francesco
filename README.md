@@ -57,7 +57,39 @@ photos: ['buda_skii.jpg', 'buda_skii_2.jpg', 'nuova-foto.jpg'],
 
 - Nello stesso blocco puoi cambiare `title`, `date`, `place` e `text` (il testo che appare nella card).
 
-### 5. Pubblicare
+### 5. Testi dei cartelli e degli NPC nel minigioco → `src/game/maps/<città>.ts`
+
+I dialoghi che Rosa legge nel gioco NON stanno in `src/content/`: sono nei file delle mappe, uno per zona:
+
+| Zona | File |
+| --- | --- |
+| Mappa d'Europa (i cartelli davanti a ogni città) | `src/game/maps/overworld.ts` |
+| Losanna / Torre di Sauvabelin | `src/game/maps/lausanne.ts` / `sauvabelin.ts` |
+| Roma, Santa Maria e dintorni | `src/game/maps/smdm.ts` |
+| Cocuruzzo | `src/game/maps/cocuruzzo.ts` |
+| Danubio + Budapest | `src/game/maps/budapest.ts` |
+| Milano | `src/game/maps/milano.ts` |
+| Torvaianica | `src/game/maps/torvaianica.ts` |
+
+In ogni file cerca la lista `signs:` (cartelli) o `npcs:` (personaggi). Ogni voce ha un `label` (il titoletto in oro sopra il fumetto) e le `lines` (le frasi, mostrate una alla volta — ogni riga = una schermata di dialogo). Cambia solo QUESTI due campi:
+
+```ts
+{
+  x: 9, y: 8,                              // ← posizione: NON toccare
+  label: 'Cattedrale di Losanna',          // ← titoletto: modificabile
+  lines: [                                 // ← frasi: modificabili, aggiungine quante vuoi
+    'Gotica, antica, piena di gradini.',
+    'Quel fiatone in cima ce lo ricordiamo ancora…',
+  ],
+  memoryId: 'lau-cattedrale',              // ← quale ricordo si apre alla fine: NON toccare
+},
+```
+
+Regole d'oro: non cambiare `x`, `y`, `kind`, `memoryId`, `character`, `custom`, `wander` (posizioni e collegamenti — muoverli può rendere un cartello irraggiungibile); virgolette e virgole come nell'esempio (apostrofi dentro le frasi: usa `"…"` doppie o l'apostrofo tipografico `'`). Frasi lunghe vanno a capo da sole, ma spezzarle in più righe rende il dialogo più bello da leggere.
+
+Per un controllo automatico prima di pubblicare: `npx tsx scripts/validate.ts` deve stampare `0 errori` (verifica che tutti i cartelli restino raggiungibili e collegati).
+
+### 6. Pubblicare
 
 Dopo ogni modifica, dalla cartella del progetto:
 
@@ -76,6 +108,7 @@ GitHub Pages ricostruisce il sito da solo (1-2 minuti). Consiglio: prima di push
 | Polaroid della sezione Ricordi | cartella `src/assets/ricordi/` (nome file = didascalia) |
 | Foto del minigioco | `public/photos/` + array `photos` in `src/content/memories.ts` |
 | Testi/date dei ricordi del minigioco | `src/content/memories.ts` |
+| Cartelli e battute degli NPC nel minigioco | `src/game/maps/<città>.ts` → campi `label` e `lines` |
 | Password del cancelletto | `src/gate/SoftGate.tsx` (ora `fake`, da riportare a `mameli`) |
 
 ## Sviluppo
