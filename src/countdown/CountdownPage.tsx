@@ -7,6 +7,7 @@ import type { Route } from '../App'
 import StarrySky from './StarrySky'
 import BloomClock from './BloomClock'
 import Cartridge from './Cartridge'
+import { tryFullscreen } from '../fullscreen'
 import './countdown.css'
 
 export interface CountdownPageProps {
@@ -255,6 +256,7 @@ export default function CountdownPage({ onStartGame, onNavigate }: CountdownPage
       <footer className="cd-foot">
         <Cartridge
           onClick={() => {
+            tryFullscreen()
             if (!crt) setCrt(true)
           }}
         />

@@ -3,8 +3,13 @@
  * e un leggero velo scanline da vecchio CRT.
  */
 import { useEffect } from 'react'
+import { tryFullscreen } from '../../fullscreen'
 
 export default function TitleScreen({ onStart }: { onStart: () => void }) {
+  const start = () => {
+    tryFullscreen()
+    onStart()
+  }
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -17,7 +22,7 @@ export default function TitleScreen({ onStart }: { onStart: () => void }) {
   }, [onStart])
 
   return (
-    <div className="rf-title" onClick={onStart}>
+    <div className="rf-title" onClick={start}>
       <div className="rf-title__stars" />
       <div className="rf-title__inner">
         <span className="rf-title__heart">♥</span>

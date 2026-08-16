@@ -22,8 +22,8 @@
 /* ── bottone ✕ (pausa) ── */
 .rf-close {
   position: absolute;
-  top: 14px;
-  right: 14px;
+  top: calc(14px + env(safe-area-inset-top, 0px));
+  right: calc(14px + env(safe-area-inset-right, 0px));
   z-index: 60;
   width: 36px;
   height: 36px;
@@ -340,8 +340,8 @@
 
 .rf-dpad {
   position: absolute;
-  left: 18px;
-  bottom: 22px;
+  left: calc(18px + env(safe-area-inset-left, 0px));
+  bottom: calc(22px + env(safe-area-inset-bottom, 0px));
   display: grid;
   grid-template-columns: repeat(3, 46px);
   grid-template-rows: repeat(3, 46px);
@@ -383,8 +383,8 @@
 
 .rf-abtn {
   position: absolute;
-  right: 24px;
-  bottom: 44px;
+  right: calc(24px + env(safe-area-inset-right, 0px));
+  bottom: calc(44px + env(safe-area-inset-bottom, 0px));
   pointer-events: auto;
   touch-action: none;
   -webkit-touch-callout: none;

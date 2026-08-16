@@ -1,4 +1,5 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
+import { tryFullscreen } from '../fullscreen'
 
 const KEY = 'rf:gate:v1'
 
@@ -19,6 +20,7 @@ export default function SoftGate({ children }: { children: ReactNode }) {
 
   const submit = (e: FormEvent) => {
     e.preventDefault()
+    tryFullscreen()
     if (normalize(value).includes('mameli')) {
       localStorage.setItem(KEY, 'ok')
       setOpen(true)

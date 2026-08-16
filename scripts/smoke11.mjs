@@ -1,0 +1,25 @@
+import { chromium, devices } from 'playwright'
+const OUT = '/tmp/claude-321503/-raid5-danese-rosa-e-francesco/7aa10d4f-6268-46f8-8406-eedc280befde/scratchpad'
+const BASE = 'http://localhost:4173/rosa-e-francesco/'
+const browser = await chromium.launch()
+const ctx = await browser.newContext({ ...devices['Pixel 7'] })
+const page = await ctx.newPage()
+const errors = []
+page.on('pageerror', (e) => errors.push(e.message))
+page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()) })
+await page.goto(BASE, { waitUntil: 'networkidle' })
+await page.fill('.gate__input', 'mameli')
+await page.tap('.gate__btn')
+await page.waitForTimeout(2000)
+const fs1 = await page.evaluate(() => !!document.fullscreenElement)
+await page.screenshot({ path: `${OUT}/90-mobile-countdown.png` })
+await page.goto(BASE + '#/gioco', { waitUntil: 'networkidle' })
+await page.waitForTimeout(800)
+await page.tap('.rf-title')
+await page.waitForTimeout(1500)
+const fs2 = await page.evaluate(() => !!document.fullscreenElement)
+await page.screenshot({ path: `${OUT}/91-mobile-game.png` })
+const manifest = await page.evaluate(async () => { const r = await fetch('manifest.webmanifest'); return r.ok })
+console.log('fullscreen after gate:', fs1, '| after START:', fs2, '| manifest ok:', manifest)
+console.log('ERRORS:', errors.length ? errors.join(' | ') : 'none')
+await browser.close()

@@ -9,6 +9,8 @@ Più le sezioni: **pensieri dolci** (lettere), **ricordi** (polaroid), **noi** (
 
 L'ingresso è protetto da una domanda dolce (risposta: *mameli*, maiuscole/minuscole indifferenti) — è solo un cancelletto gentile, non vera sicurezza: il sito e le foto restano pubblici per chi ha il link.
 
+**Sul telefono, a schermo intero.** Su Android/Chrome il sito passa da solo a schermo intero al primo tocco (al cancelletto o al START del gioco). Su iPhone Safari non è permesso alle pagine web: la via giusta è **Condividi → Aggiungi alla schermata Home** — l'icona col cuore apre il sito come un'app, senza barra del browser (funziona anche su Android: menu ⋮ → "Installa app" / "Aggiungi a schermata Home").
+
 ## ✏️ Come aggiornare i contenuti (guida pratica)
 
 Tutto ciò che è "tuo" (testi, foto, lettere) sta in due posti: `src/content/` per i testi e due cartelle per le immagini. Nessuna modifica al codice.
