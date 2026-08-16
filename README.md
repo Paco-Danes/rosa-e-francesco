@@ -7,7 +7,7 @@ Un regalo in due atti, online su **https://paco-danes.github.io/rosa-e-francesco
 
 Più le sezioni: **pensieri dolci** (lettere), **ricordi** (polaroid), **noi** (contatori dall'8 agosto 2025).
 
-L'ingresso è protetto da una domanda dolce. **Password provvisoria durante i lavori: *fake*** (quando il sito sarà pronto, riportarla a *mameli* in `src/gate/SoftGate.tsx`). Maiuscole/minuscole indifferenti — è solo un cancelletto gentile, non vera sicurezza: il sito e le foto restano pubblici per chi ha il link.
+L'ingresso è protetto da una domanda dolce (risposta: *mameli*, maiuscole/minuscole indifferenti) — è solo un cancelletto gentile, non vera sicurezza: il sito e le foto restano pubblici per chi ha il link.
 
 ## ✏️ Come aggiornare i contenuti (guida pratica)
 
@@ -110,7 +110,7 @@ GitHub Pages ricostruisce il sito da solo (1-2 minuti). Consiglio: prima di push
 | Foto del minigioco | `public/photos/` + array `photos` in `src/content/memories.ts` |
 | Testi/date dei ricordi del minigioco | `src/content/memories.ts` |
 | Cartelli e battute degli NPC nel minigioco | `src/game/maps/<città>.ts` → campi `label` e `lines` |
-| Password del cancelletto | `src/gate/SoftGate.tsx` (ora `fake`, da riportare a `mameli`) |
+| Password del cancelletto | `src/gate/SoftGate.tsx` (`mameli`) |
 
 ## Sviluppo
 
