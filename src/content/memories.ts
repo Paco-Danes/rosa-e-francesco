@@ -175,7 +175,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Ogni volta',
     place: 'Le tavolate di Cocuruzzo',
     text: 'Antipasti che sono pranzi interi, brindisi, bis obbligatori. Qui l’amore si misura in porzioni, e con te faccio sempre il tris.',
-    photos: ['cocu_4.jpg#top'],
+    photos: ['cocu_a_tavola_1.jpg', 'cocu_a_tavola_2.jpg'],
   },
   'coc-vicoli': {
     city: 'Cocuruzzo',
