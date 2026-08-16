@@ -73,11 +73,12 @@ export const sauvabelinScene: Scene = {
   props: [],
 
   signs: [
-    // il ricordo, al centro della balaustra: Rosa lo legge guardando lontano
+    // il ricordo: un cartello di legno appoggiato alla balaustra, sulla riga
+    // alta del camminamento (baseY 144 > 128 del panorama → sempre visibile
+    // davanti allo sfondo). Rosa lo legge dalla riga 9, guardando in su.
     {
       x: 15,
-      y: 7,
-      kind: 'none',
+      y: 8,
       label: 'La vista dalla Torre',
       lines: [
         "Le Alpi da una parte, il lago dall'altra, Losanna sotto i piedi.",
