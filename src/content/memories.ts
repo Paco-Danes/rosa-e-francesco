@@ -159,7 +159,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Agosto 2025',
     place: 'La piscina',
     text: 'Tuffi, schizzi e gare a chi resta di più sott’acqua (vinci sempre tu). L’estate profuma di cloro, crema solare e di noi.',
-    photos: ['cocu_4.jpg'],
+    photos: ['cocu_4.jpg#top'],
   },
   'coc-fuochi': {
     city: 'Cocuruzzo',
@@ -175,7 +175,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Ogni volta',
     place: 'Le tavolate di Cocuruzzo',
     text: 'Antipasti che sono pranzi interi, brindisi, bis obbligatori. Qui l’amore si misura in porzioni, e con te faccio sempre il tris.',
-    photos: ['cocu_4.jpg'],
+    photos: ['cocu_4.jpg#top'],
   },
   'coc-vicoli': {
     city: 'Cocuruzzo',
