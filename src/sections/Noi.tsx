@@ -48,7 +48,9 @@ export default function Noi({ onBack }: SectionProps) {
     })
   }
 
-  const battiti = tempo.giorni * 100_000
+  // medie umane a riposo: ~72 battiti/min → 103.680 al giorno; ~16 respiri/min → 23.040 al giorno
+  const battiti = tempo.giorni * 103_680
+  const respiri = tempo.giorni * 23_040
 
   return (
     <div className="sez">
@@ -89,8 +91,8 @@ export default function Noi({ onBack }: SectionProps) {
 
         <div className="noi__derivate">
           <div className="noi__derivata">
-            <div className="noi__derivata-num">{fmt.format(tempo.giorni)}</div>
-            <div className="noi__derivata-label">albe viste insieme</div>
+            <div className="noi__derivata-num">{fmt.format(respiri)}</div>
+            <div className="noi__derivata-label">respiri completi, più o meno</div>
           </div>
           <div className="noi__derivata">
             <div className="noi__derivata-num">{fmt.format(battiti)}</div>
