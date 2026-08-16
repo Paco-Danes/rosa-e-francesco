@@ -65,7 +65,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Autunno 2025',
     place: 'Cathédrale de Lausanne',
     text: 'Tutti quei gradini per arrivare in cima, e tu che ridevi del mio fiatone. Dall’alto la città sembrava piccola: noi due no.',
-    photos: ['lau-cattedrale.svg'],
+    photos: ['losanna_cattedrale.jpg'],
   },
   'lau-flon': {
     city: 'Losanna',
@@ -73,7 +73,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Inverno 2025',
     place: 'Quartiere del Flon, Losanna',
     text: 'Le luci del Flon, le vetrine, il freddo che era solo una scusa per stringersi di più. Ogni angolo di quel quartiere sa qualcosa di noi.',
-    photos: ['lau_1.jpg'],
+    photos: ['losanna_flon.jpg'],
   },
   'lau-olimpico': {
     city: 'Losanna',
@@ -89,7 +89,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Autunno 2025',
     place: 'Tour de Sauvabelin, nel bosco sopra Losanna',
     text: 'Gradino di legno dopo gradino, fino sopra le cime degli alberi: il lago, le Alpi e i tetti di Losanna tutti in una volta. Il mondo, da lassù, sembrava fatto apposta per guardarlo in due.',
-    photos: ['lau_tower.jpg'],
+    photos: ['torre_losanna.jpg'],
   },
 
   // ─── Roma, Santa Maria e dintorni — «Casa» ───
@@ -241,7 +241,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Estate 2026',
     place: 'Stadio San Siro, Milano',
     text: 'Sessantamila persone, e io che cantavo guardando te. "Just the way you are": non l’ha scritta lui, l’ha scritta per noi e non lo sa.',
-    photos: ['mil-sansiro.svg'],
+    photos: ['sansiro_milano.jpg'],
   },
 
   'mil-michelangelo': {
@@ -250,7 +250,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Un pomeriggio qualunque',
     place: 'Il piccolo appartamento di Michelangelo, Milano',
     text: 'Un divano, due chiacchiere e il guacamole di Michelangelo — tecnicamente in malattia, praticamente in cucina. Le case degli amici sono le tappe più belle dei viaggi.',
-    photos: ['mil-michelangelo.svg'],
+    photos: ['casa_michelangelo.jpg'],
   },
 
   // ─── Torvaianica — «Sale e tramonti» ───
@@ -284,6 +284,6 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Le sere d’estate',
     place: 'Il kebabbaro di Torvaianica',
     text: 'Salsa yogurt, patatine dentro, e la fame di chi ha passato la giornata al mare. I tavolini fuori, il sole che scende: il ristorante stellato del nostro cuore.',
-    photos: ['tor-kebab.svg'],
+    photos: ['kebab.jpg'],
   },
 }
