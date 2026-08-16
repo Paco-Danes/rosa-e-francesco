@@ -13,12 +13,10 @@ export type MemoryId =
   | 'lau-cattedrale'
   | 'lau-flon'
   | 'lau-olimpico'
-  | 'lau-migros'
   | 'lau-sauvabelin'
   | 'smdm-piazza'
   | 'smdm-casa-rosa'
   | 'smdm-gabbiano'
-  | 'smdm-ibba'
   | 'smdm-colosseo'
   | 'smdm-ovindoli'
   | 'smdm-laghi'
@@ -34,9 +32,11 @@ export type MemoryId =
   | 'bud-ghiaccio'
   | 'mil-duomo'
   | 'mil-sansiro'
+  | 'mil-michelangelo'
   | 'tor-mare'
   | 'tor-tramonto'
   | 'tor-gelato'
+  | 'tor-kebab'
 
 export interface Memory {
   city: string
@@ -83,14 +83,6 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     text: 'Tra fiamme olimpiche e medaglie, ho pensato che la mia vittoria più grande era camminarti accanto. Podio: primo posto, per sempre.',
     photos: ['lau_olympic.jpg'],
   },
-  'lau-migros': {
-    city: 'Losanna',
-    title: 'La nostra Migros',
-    date: 'Ogni settimana',
-    place: 'Una piccola Migros di Losanna',
-    text: 'La spesa insieme: tu con la lista, io che aggiungevo cose a caso nel carrello. Le cose più normali, con te, sono le mie preferite.',
-    photos: ['lau-migros.svg'],
-  },
   'lau-sauvabelin': {
     city: 'Losanna',
     title: 'La Torre di Sauvabelin',
@@ -124,14 +116,6 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     place: 'Palestra "Il Gabbiano"',
     text: 'Qui voli tu: capriole, equilibri e cose che io non capisco ma guardo a bocca aperta. La mia acrobata preferita, in palestra e nella vita.',
     photos: ['gabbiano_1.jpg', 'gabbiano_2.jpg', 'gabbiano_3.jpg', 'smdm_8_funny.jpg'],
-  },
-  'smdm-ibba': {
-    city: 'Santa Maria delle Mole',
-    title: 'Officine Ibba',
-    date: 'Le domeniche',
-    place: 'Caffè Officine Ibba',
-    text: 'Il nostro tavolino, i cornetti, le chiacchiere che non finivano mai. Certe officine riparano motori; questa riparava le giornate storte.',
-    photos: ['smdm-ibba.svg'],
   },
   'smdm-colosseo': {
     city: 'Roma',
@@ -260,6 +244,15 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     photos: ['mil-sansiro.svg'],
   },
 
+  'mil-michelangelo': {
+    city: 'Milano',
+    title: 'Casa di Michelangelo',
+    date: 'Un pomeriggio qualunque',
+    place: 'Il piccolo appartamento di Michelangelo, Milano',
+    text: 'Un divano, due chiacchiere e il guacamole di Michelangelo — tecnicamente in malattia, praticamente in cucina. Le case degli amici sono le tappe più belle dei viaggi.',
+    photos: ['mil-michelangelo.svg'],
+  },
+
   // ─── Torvaianica — «Sale e tramonti» ───
   'tor-mare': {
     city: 'Torvaianica',
@@ -284,5 +277,13 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     place: 'Chiosco "La dolce vita"',
     text: 'Il chiosco dei gelati con il nome giusto. Tu sempre indecisa sul gusto, io sempre deciso su di te. Alla fine: due coni, un’unica dolce vita.',
     photos: ['torva_3.jpg'],
+  },
+  'tor-kebab': {
+    city: 'Torvaianica',
+    title: 'Il Kebabbaro',
+    date: 'Le sere d’estate',
+    place: 'Il kebabbaro di Torvaianica',
+    text: 'Salsa yogurt, patatine dentro, e la fame di chi ha passato la giornata al mare. I tavolini fuori, il sole che scende: il ristorante stellato del nostro cuore.',
+    photos: ['tor-kebab.svg'],
   },
 }

@@ -216,7 +216,6 @@ export const lausanneScene: Scene = {
         'Sconti sul cioccolato quasi ogni giorno.',
         'Una lista della spesa, e mille sorprese nel carrello.',
       ],
-      memoryId: 'lau-migros',
     },
     {
       x: 18,
@@ -238,16 +237,6 @@ export const lausanneScene: Scene = {
         'Qui il tempo rallentava sempre — e a noi andava benissimo così.',
       ],
       memoryId: 'lau-ouchy',
-    },
-    // il cartello di legno alla base della torre
-    {
-      x: 25,
-      y: 5,
-      label: 'Torre di Sauvabelin',
-      lines: [
-        '302 gradini di legno fino al cielo.',
-        'Su, su, su: il panorama ripaga tutto. Anche il fiatone.',
-      ],
     },
   ],
 

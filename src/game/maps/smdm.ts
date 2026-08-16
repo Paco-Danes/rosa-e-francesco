@@ -224,7 +224,6 @@ export const smdmScene: Scene = {
         'Il nostro tavolino è quello vicino alla vetrina.',
         'Cornetti caldi, chiacchiere lente e domeniche che non volevano finire.',
       ],
-      memoryId: 'smdm-ibba',
     },
     {
       x: 32,
