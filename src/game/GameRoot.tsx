@@ -83,7 +83,7 @@ export default function GameRoot({ onExit }: GameRootProps) {
   const showBanner = (name: string) => {
     setBanner({ name, n: ++counterRef.current })
     window.clearTimeout(bannerTimer.current)
-    bannerTimer.current = window.setTimeout(() => setBanner(null), 2300)
+    bannerTimer.current = window.setTimeout(() => setBanner(null), 4600)
   }
 
   /* ── vita del motore ── */
