@@ -6,6 +6,8 @@
  * (file dentro `public/photos/`): la prima è quella in copertina, le altre
  * si sfogliano come un mazzo di polaroid. Aggiungere una foto = aggiungere
  * il file e il nome qui.
+ * Foto verticali: aggiungi '#top' o '#bottom' al nome (es. 'foto.jpg#top') per
+ * dire quale bordo tenere quando la card la ritaglia in 4:3.
  */
 
 export type MemoryId =
@@ -115,7 +117,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Tutto l’anno',
     place: 'Palestra "Il Gabbiano"',
     text: 'Qui voli tu: capriole, equilibri e cose che io non capisco ma guardo a bocca aperta. La mia acrobata preferita, in palestra e nella vita.',
-    photos: ['gabbiano_1.jpg', 'gabbiano_2.jpg', 'gabbiano_3.jpg', 'smdm_8_funny.jpg'],
+    photos: ['gabbiano_1.jpg#top', 'gabbiano_2.jpg', 'gabbiano_3.jpg', 'smdm_8_funny.jpg'],
   },
   'smdm-colosseo': {
     city: 'Roma',
@@ -157,7 +159,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Agosto 2025',
     place: 'La piscina',
     text: 'Tuffi, schizzi e gare a chi resta di più sott’acqua (vinci sempre tu). L’estate profuma di cloro, crema solare e di noi.',
-    photos: ['coc-piscina.svg'],
+    photos: ['cocu_4.jpg'],
   },
   'coc-fuochi': {
     city: 'Cocuruzzo',
@@ -260,7 +262,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Estate 2025',
     place: 'Spiaggia di Torvaianica',
     text: 'I piedi nella sabbia, le onde che contano i secondi meglio di qualsiasi orologio. Il mare di casa non sarà famoso, ma ci ha visti felici.',
-    photos: ['torva_1.jpg', 'torva_2.jpg', 'torva_4.jpg'],
+    photos: ['torva_1.jpg', 'torva_2.jpg'],
   },
   'tor-tramonto': {
     city: 'Torvaianica',
@@ -268,7 +270,7 @@ export const MEMORIES: Record<MemoryId, Memory> = {
     date: 'Estate 2025',
     place: 'Riva al tramonto',
     text: 'Il sole che si scioglie nel mare e il cielo che fa i colori che piacciono a te. Restiamo "ancora cinque minuti" da un anno intero.',
-    photos: ['torva_7.jpg', 'torva_8.jpg'],
+    photos: ['torva_4.jpg', 'torva_1.jpg', 'torva_7.jpg', 'torva_8.jpg'],
   },
   'tor-gelato': {
     city: 'Torvaianica',

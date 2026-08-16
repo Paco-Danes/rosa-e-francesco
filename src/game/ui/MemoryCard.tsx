@@ -84,13 +84,19 @@ export default function MemoryCard({ id, onClose }: { id: MemoryId; onClose: () 
   }
 
   const base = import.meta.env.BASE_URL + 'photos/'
+  // "foto.jpg#top" / "#bottom" = quale bordo conservare quando la card ritaglia
+  const photoOf = (p: string) => {
+    const [file, focus] = p.split('#')
+    const pos = focus === 'top' ? '50% 0%' : focus === 'bottom' ? '50% 100%' : undefined
+    return { src: base + file, style: pos ? { objectPosition: pos } : undefined }
+  }
 
   return (
     <div className="rf-memory" onClick={onClose}>
       <figure className="rf-memory__card" onClick={(e) => e.stopPropagation()}>
         <span className="rf-memory__city">{m.city}</span>
         {count <= 1 ? (
-          <img className="rf-memory__photo" src={base + m.photos[0]} alt={m.title} />
+          <img className="rf-memory__photo" src={photoOf(m.photos[0]).src} style={photoOf(m.photos[0]).style} alt={m.title} />
         ) : (
           <div className="rf-deck" onClick={() => go(1)}>
             {m.photos.map((p, i) => {
@@ -106,7 +112,8 @@ export default function MemoryCard({ id, onClose }: { id: MemoryId; onClose: () 
               return (
                 <div key={animating ? `${i}-a${deck.anim!.n}` : `${i}`} className={cls}>
                   <img
-                    src={base + p}
+                    src={photoOf(p).src}
+                    style={photoOf(p).style}
                     alt={`${m.title} — foto ${i + 1} di ${count}`}
                     draggable={false}
                   />

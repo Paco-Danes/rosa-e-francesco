@@ -56,6 +56,7 @@ photos: ['buda_skii.jpg', 'buda_skii_2.jpg', 'nuova-foto.jpg'],
 ```
 
 - Nello stesso blocco puoi cambiare `title`, `date`, `place` e `text` (il testo che appare nella card).
+- Foto **verticali** che la card ritaglia male: aggiungi `#top` o `#bottom` al nome (`'foto.jpg#top'`) per dire quale bordo conservare.
 
 ### 5. Testi dei cartelli e degli NPC nel minigioco → `src/game/maps/<città>.ts`
 
