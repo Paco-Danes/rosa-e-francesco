@@ -4,14 +4,23 @@
  * L'ora d'oro sulla città: a est la Piazza del Duomo con il marmo che prende
  * il tramonto, a ovest San Siro con il palco del concerto di Bruno Mars.
  * In mezzo, un tram giallo fermo al capolinea e un parco che scende verso
- * l'uscita.
+ * l'uscita; nell'angolo in basso a destra, la palazzina di Michelangelo.
  *
  * Griglia 30×22 — legenda locale (i caratteri NON sono quelli della palette):
  *   g grass · e grass2 · f flowers · w tallGrass · p plaza · c cobble
  *   P path · s sidewalk · a asphalt
  */
 import type { Scene } from './types'
-import { duomo, galleria, sanSiro, palco, tram, brunoMars } from '../art/buildings/milano'
+import {
+  duomo,
+  galleria,
+  sanSiro,
+  palco,
+  tram,
+  brunoMars,
+  casaMichelangelo,
+  michelangelo,
+} from '../art/buildings/milano'
 
 const W = 30
 const H = 22
@@ -34,11 +43,11 @@ const ground = [
   'ccccccccccc' + 'aaaaaa' + 'ppppppppppppp',
   'ge' + 'PPPPPPPPP' + 'ssssss' + 'PPPPPPPPPPP' + 'gg',
   'gf' + 'PPPPPPPPPPPPPPPPPPPPPPPPPP' + 'eg',
-  'ggeggwggggfg' + 'PPPPPP' + 'gfggeggwgggg',
-  'gwwggggeggge' + 'PPPPPP' + 'ggggwwgggegg',
-  'ggggfggggggg' + 'PPPPPP' + 'gegggfgggwgg',
-  'gegwgggfggge' + 'PPPPPP' + 'gggegggggfge',
-  'ggggggeggggg' + 'PPPPPP' + 'gfgggegggggg',
+  'ggeggwggggfg' + 'PPPPPP' + 'gfggeggggggg',
+  'gwwggggeggge' + 'PPPPPP' + 'ggggwwgggggg',
+  'ggggfggggggg' + 'PPPPPP' + 'gegggfgggggg',
+  'gegwgggfggge' + 'PPPPPP' + 'gggeggggPfge',
+  'ggggggeggggg' + 'PPPPPP' + 'gfgggeggPggg',
   'gggfggggwggg' + 'PPPPPP' + 'ggggggwggfgg',
 ]
 
@@ -71,6 +80,8 @@ export const milanoScene: Scene = {
     { sprite: duomo, x: 21, y: 0, solid: { x: 0, y: 2, w: 7, h: 3 } },
     // Il tram giallo fermo al capolinea
     { sprite: tram, x: 12, y: 10, solid: { x: 0, y: 1, w: 4, h: 2 } },
+    // La palazzina di Michelangelo: si passa dietro il tetto piatto
+    { sprite: casaMichelangelo, x: 25, y: 15, solid: { x: 0, y: 1, w: 3, h: 3 } },
   ],
   props: [
     // lampioni dell'esplanade del concerto
@@ -109,7 +120,6 @@ export const milanoScene: Scene = {
     { prop: 'tree', x: 2, y: 20 },
     { prop: 'tree', x: 9, y: 19 },
     { prop: 'tree', x: 20, y: 20 },
-    { prop: 'tree', x: 26, y: 17 },
     { prop: 'tree', x: 28, y: 20 },
     { prop: 'roseBush', x: 9, y: 16 },
     { prop: 'roseBush', x: 20, y: 16 },
@@ -117,6 +127,9 @@ export const milanoScene: Scene = {
     { prop: 'flowerPatch', x: 22, y: 16 },
     { prop: 'flowerPatch', x: 7, y: 18 },
     { prop: 'flowerPatch', x: 24, y: 19 },
+    // davanti a casa di Michelangelo: un vaso e la panchina del cortile
+    { prop: 'pot', x: 24, y: 18 },
+    { prop: 'bench', x: 28, y: 16 },
   ],
   signs: [
     {
@@ -139,6 +152,16 @@ export const milanoScene: Scene = {
         '«Just the way you are»: non l’ha scritta lui. L’ha scritta per voi, e non lo sa.',
       ],
       memoryId: 'mil-sansiro',
+    },
+    {
+      x: 25,
+      y: 19,
+      label: 'Casa di Michelangelo',
+      lines: [
+        'Un divano, due chiacchiere e il guacamole di Michelangelo.',
+        'Le case degli amici sono le tappe più belle dei viaggi.',
+      ],
+      memoryId: 'mil-michelangelo',
     },
     {
       x: 24,
@@ -166,6 +189,15 @@ export const milanoScene: Scene = {
     },
   ],
   npcs: [
+    {
+      character: 'npcMan',
+      custom: michelangelo,
+      x: 27,
+      y: 19,
+      dir: 'down',
+      label: 'Michelangelo',
+      lines: ['Si sono tecnicamente in malattia... vuoi del guacamole ??'],
+    },
     {
       character: 'npcMan',
       custom: brunoMars,

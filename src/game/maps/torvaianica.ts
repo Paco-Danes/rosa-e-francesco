@@ -1,16 +1,18 @@
 /**
  * TORVAIANICA — «Sale e tramonti»: il mare di casa al tramonto.
  *
- * A nord i giardini e il sentiero che riporta al mondo; in mezzo il chiosco
+ * A nord i giardini e il sentiero che riporta al mondo, con il Kebabbaro e
+ * il suo dehors di tavolini in alto a destra; in mezzo il chiosco
  * "La dolce vita" e il lungomare di assi di legno con panchine e lampioni;
- * a sud la spiaggia con gli ombrelloni, la cabina a righe, il bagnasciuga
- * e il pontile che entra nel mare fino al posto dei tramonti.
+ * a sud la spiaggia con gli ombrelloni, la cabina a righe, il bagnasciuga,
+ * il cartello del tramonto ai piedi del pontile e il pontile che entra nel
+ * mare fino al posto dei tramonti.
  *
  * NOTA layout: qui il mare è a SUD, quindi l'uscita verso l'overworld è sul
  * bordo NORD (deroga al template) e lo spawn le sta appena sotto, dir 'down'.
  */
 import type { Scene } from './types'
-import { chioscoGelato, cabinaMare } from '../art/buildings/torvaianica'
+import { chioscoGelato, cabinaMare, kebabbaro } from '../art/buildings/torvaianica'
 
 export const torvaianicaScene: Scene = {
   id: 'torvaianica',
@@ -25,21 +27,23 @@ export const torvaianicaScene: Scene = {
     t: { base: 'tallGrass' },
     p: { base: 'path' },
     w: { base: 'wood' },
+    d: { base: 'sidewalk' },
     s: { base: 'sand' },
     q: { base: 'sandWet' },
     b: { base: 'water', solid: true },
     B: { base: 'deepWater', solid: true },
   },
-  // 26×20 — sentiero a nord (x11-14), lungomare y9-10, spiaggia, mare a sud;
-  // il pontile di legno (x18-19) scende dal lungomare fin dentro l'acqua.
+  // 26×20 — sentiero a nord (x11-14), Kebabbaro con dehors (x18-23, y1-6),
+  // lungomare y9-10, spiaggia, mare a sud; il pontile di legno (x18-19)
+  // scende dal lungomare fin dentro l'acqua.
   ground: [
     'ggGgfgggGggppppggfgGggGggg', // 0  ← uscita verso l'overworld
     'gfgggGgggfgppppgGgggfgggGg', // 1
     'ggggtggggggppppgggtgggfggg', // 2  ← spawn (12,2)
-    'gGgfgggGgggppppggggGggttgg', // 3
+    'gGgfgggGgggppppggggGggttgg', // 3  ← Kebabbaro (x19-22, facciata y3-4)
     'ggggggggfggppppgfgggggtggg', // 4  ← chiosco (x3-7)
-    'gggggggggGgppppggGgfgggggg', // 5
-    'gGgggggggfgppppgggggGggggg', // 6
+    'gggggggggGgppppggGddddddgg', // 5  ← dehors del Kebabbaro (x18-23)
+    'gGgggggggfgppppgggddddddgg', // 6
     'gggggggggggppppgfgggggggGg', // 7
     'gggppppppppppppgggfgggGggg', // 8  ← piazzetta del chiosco
     'wwwwwwwwwwwwwwwwwwwwwwwwww', // 9  ← lungomare
@@ -59,18 +63,24 @@ export const torvaianicaScene: Scene = {
     { sprite: chioscoGelato, x: 3, y: 4, solid: { x: 0, y: 2, w: 5, h: 2 } },
     // Cabina balneare a righe sulla sabbia, in fondo al lungomare.
     { sprite: cabinaMare, x: 23, y: 10, solid: { x: 0, y: 1, w: 3, h: 2 } },
+    // Il Kebabbaro: tetto in coppi che sborda sull'erba, solo la facciata è solida.
+    { sprite: kebabbaro, x: 19, y: 1, solid: { x: 0, y: 2, w: 4, h: 2 } },
   ],
   props: [
     // giardini a nord
     { prop: 'palm', x: 0, y: 3 },
-    { prop: 'palm', x: 23, y: 3 },
-    { prop: 'palm', x: 20, y: 7 },
+    { prop: 'palm', x: 24, y: 2 },
+    { prop: 'palm', x: 24, y: 7 },
     { prop: 'tree', x: 16, y: 3 },
     { prop: 'bush', x: 0, y: 7 },
     { prop: 'roseBush', x: 10, y: 6 },
     { prop: 'flowerPatch', x: 2, y: 2 },
-    { prop: 'flowerPatch', x: 18, y: 6 },
-    { prop: 'flowerPatch', x: 21, y: 4 },
+    { prop: 'flowerPatch', x: 17, y: 5 },
+    { prop: 'flowerPatch', x: 21, y: 7 },
+    // il dehors del Kebabbaro
+    { prop: 'table', x: 19, y: 6 },
+    { prop: 'table', x: 22, y: 6 },
+    { prop: 'lamp', x: 23, y: 5 },
     // la piazzetta del chiosco
     { prop: 'pot', x: 2, y: 7 },
     { prop: 'pot', x: 8, y: 7 },
@@ -112,7 +122,17 @@ export const torvaianicaScene: Scene = {
     },
     {
       x: 18,
-      y: 17,
+      y: 5,
+      label: 'Il Kebabbaro',
+      lines: [
+        'Stelle Michelin: zero. Salse: tutte. Il ristorante stellato del nostro cuore.',
+        'Patatine dentro, tramonto fuori: il menù perfetto per due.',
+      ],
+      memoryId: 'tor-kebab',
+    },
+    {
+      x: 17,
+      y: 13,
       label: 'Il tramonto',
       lines: [
         'Da qui il sole si scioglie nel mare, piano piano.',
@@ -151,6 +171,14 @@ export const torvaianicaScene: Scene = {
       y: 9,
       wander: true,
       lines: ['Che colori, stasera.', 'Qui i tramonti non si guardano: si aspettano.'],
+    },
+    {
+      character: 'npcMan',
+      x: 21,
+      y: 5,
+      dir: 'down',
+      label: 'Il kebabbaro',
+      lines: ['Salsa? Tutte.', 'Piccante? Per lui sì. Per lei... «un pochino».'],
     },
     {
       character: 'npcMan',

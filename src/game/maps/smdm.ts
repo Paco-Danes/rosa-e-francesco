@@ -195,9 +195,8 @@ export const smdmScene: Scene = {
       memoryId: 'smdm-piazza',
     },
     {
-      x: 17,
+      x: 20,
       y: 24,
-      kind: 'none',
       label: 'La nostra casa',
       lines: [
         'Il tetto rosso, il comignolo che fuma, le rose sul vialetto.',

@@ -8,6 +8,12 @@
  *
  * cabinaMare: cabina balneare a righe (48×48 px, 3×3 tile), porta con oblò.
  * Solid consigliato: { x: 0, y: 1, w: 3, h: 2 }.
+ *
+ * kebabbaro: il ristorante kebab (64×64 px, 4×4 tile) — tetto in coppi
+ * arancio, insegna rossa "KEBAB" con due spiedini, tenda a righe rosse e
+ * bianche, vetrina calda con lo spiedo di carne che gira, le pite impilate
+ * e le salse, menù appeso e porta di legno a destra.
+ * Solid consigliato: { x: 0, y: 2, w: 4, h: 2 } (solo la facciata).
  */
 import { sprite } from '../format'
 
@@ -127,4 +133,71 @@ export const cabinaMare = sprite([
     'KAAAAAPPPPPPAAAAAAUUUUUUUUUUUUPPPPPPAAAAAAPPPPPK',
     'KkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkK',
     'KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK',
+])
+
+export const kebabbaro = sprite([
+    '......KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK......',
+    '.....KooooooooooooooooooooooooooooooooooooooooooooooooooooK.....',
+    '....KooooooooooooooooooooooooooooooooooooooooooooooooooooooK....',
+    '...KOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooK...',
+    '..KooooooooooooooooooooooooooooooooooooooooooooooooooooooooooK..',
+    '.KOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooOoooK.',
+    'KOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK',
+    'KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWK',
+    'KWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRWWWWK',
+    'KWWWWRrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrRWWWWK',
+    'KWWWWRrrrrrrrwrrrrrrrrrwrwrwwwrwwrrrwrrwwrrrrrrrrrrwrrrrrrRWWWWK',
+    'KWWWWRrrrrrrooorrrrrrrrwrwrwrrrwrwrwrwrwrwrrrrrrrrooorrrrrRWWWWK',
+    'KWWWWRrrrrrrOoOrrrrrrrrwwrrwwwrwwrrwwwrwwrrrrrrrrrOoOrrrrrRWWWWK',
+    'KWWWWRrrrrrrooorrrrrrrrwrwrwrrrwrwrwrwrwrwrrrrrrrrooorrrrrRWWWWK',
+    'KWWWWRrrrrrrrwrrrrrrrrrwrwrwwwrwwrrwrwrwwrrrrrrrrrrwrrrrrrRWWWWK',
+    'KWWWWRrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrRWWWWK',
+    'KWWWWRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWK',
+    'KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK',
+    'KrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrK',
+    'KrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrK',
+    'KrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrK',
+    'KrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrK',
+    'KrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrK',
+    'KrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrrwwwwwwwrrrrrrK',
+    'KRRRRRRRAAAAAAARRRRRRRAAAAAAARRRRRRRAAAAAAARRRRRRRAAAAAAARRRRRRK',
+    'KKrrrrrKKwwwwwKKrrrrrKKwwwwwKKrrrrrKKwwwwwKKrrrrrKKwwwwwKKrrrrKK',
+    '..KrrrK..KwwwK..KrrrK..KwwwK..KrrrK..KwwwK..KrrrK..KwwwK..KrrK..',
+    '...KKK....KKK....KKK....KKK....KKK....KKK....KKK....KKK....KK...',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWK',
+    'KWWWUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUWWWWWWUUUUUUUUUUUUWWWWWK',
+    'KWWWUzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzUWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWUYYYYYYYYYYYYYYYYYAYYYYYYYYYYYYYYYYUWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWUyyyyyyyyyyyyyyyOoAoOyyyyyyyyyyyyyyUWKKKKWUuuuzyyzuuuUWWWWWK',
+    'KWWWUyyyyyyyyyyyyyyOoFAFoOyyyyyyyyyyyyyUWKwwKWUuuuyyyyuuuUWWWWWK',
+    'KWWWUyyyyyyyyyyyyyOooFAFooOyyyyyyyyyyyyUWKooKWUuuuyyyyuuuUWWWWWK',
+    'KWWWUyyyyyyyyyyyyOoooFAFoooOyyyyyyyyyyyUWKwwKWUuuuzyyzuuuUWWWWWK',
+    'KWWWUyyyyyyyyyyyyOoooFAFoooOyyyRyyyxyyyUWKwwKWUuuuuuuuuuuUWWWWWK',
+    'KWWWUyyyyyyyyyyyyOoOoFAFoOoOyyrrRywwAyyUWKooKWUuuuuuuuuuuUWWWWWK',
+    'KWWWUyyysSSSsyyyyOoooFAFoooOyyrrRywwAyyUWKwwKWUuuuuuuuuuuUWWWWWK',
+    'KWWWUyysSSSSSsyyyyOooFAFooOyyyrrRywwAyyUWKwwKWUuuuuuuuuuuUWWWWWK',
+    'KWWWUyySsssssSyyyyOoOFAFOoOyyyrrRywwAyyUWKwwKWUuuuuuuuuuuUWWWWWK',
+    'KWWWUyysSSSSSsyyyyyOoFAFoOyyyyrrRywwAyyUWKKKKWUuuuuuuuuuuUWWWWWK',
+    'KWWWUyySsssssSyyyyyyOoAoOyyyyyrrRywwAyyUWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWUyysSSSSSsyyyyyyyyAyyyyyyyrrRywwAyyUWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWUyySsssssSyyyyXxxxxxxxXyyyrrRywwAyyUWWWWWWUuuuuuuuuYuUWWWWWK',
+    'KWWWUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWUuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuUWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWUuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuUWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWUuuuuuuuuuuUWWWWWK',
+    'KCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCUuuuuuuuuuuUCCCCCK',
+    'KCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCUuuuuuuuuuuUCCCCCK',
+    'KkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkK',
+    'KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK',
 ])
